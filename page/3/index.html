@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"save":"auto"},
+    fancybox: true,
+    mediumzoom: true,
+    lazyload: true,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+<meta name="keywords" content="计算机, 编程, 单片机, 物联网, code, coding, Mt.r">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TRY CODING FUN">
+<meta property="og:url" content="https://trycoding.fun/page/3/index.html">
+<meta property="og:site_name" content="TRY CODING FUN">
+<meta property="og:description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TRY CODING FUN">
+<meta name="twitter:description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+  <link rel="canonical" href="https://trycoding.fun/page/3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>TRY CODING FUN - 重拾编程的乐趣</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TRY CODING FUN</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">重拾编程的乐趣</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+      <a class="book-mark-link book-mark-link-fixed fa fa-bookmark" href="#"></a>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-home">
+            
+  <section id="posts" class="posts-expand">
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/C/c_language_remove_spaces_from_string/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/C/c_language_remove_spaces_from_string/" class="post-title-link" itemprop="url">C语言去除空格</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-11 22:22:12" itemprop="dateCreated datePublished" datetime="2018-01-11T22:22:12+08:00">2018-01-11</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:45" itemprop="dateModified" datetime="2018-12-03T01:13:45+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>1.2k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天我去应聘，面试我的大佬考了我一道题，但是我没有做出来，太丢人了。<br>他的要求是C语言写出一个去除空格的函数。<br>应该自我反省并做笔记。<br>查了一下资料，多次实验，给出的程序如下。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">trim</span><span class="params">(<span class="keyword">char</span> *strIn, <span class="keyword">char</span> *strOut)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, j ;</span><br><span class="line">	i = <span class="number">0</span>;</span><br><span class="line">	j = <span class="built_in">strlen</span>(strIn) - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (strIn[i] == <span class="string">' '</span>)</span><br><span class="line">		++i;</span><br><span class="line">	<span class="keyword">while</span> (strIn[j] == <span class="string">' '</span>)</span><br><span class="line">		--j;</span><br><span class="line">	<span class="built_in">strncpy</span>(strOut, strIn + i , j - i + <span class="number">1</span>);</span><br><span class="line">	strOut[j - i + <span class="number">1</span>] = <span class="string">'\0'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> *strIn = <span class="string">"   ak kl  p  "</span>;</span><br><span class="line">	<span class="keyword">char</span> strOut[<span class="number">100</span>];</span><br><span class="line">	trim(strIn, strOut);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"*%s*\n"</span>, strOut);</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还可以用下面的函数去除空格</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">trim</span><span class="params">(<span class="keyword">char</span> *strIn, <span class="keyword">char</span> *strOut)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> *start, *end, *temp;<span class="comment">//定义去除空格后字符串的头尾指针和遍历指针</span></span><br><span class="line">	temp = strIn;</span><br><span class="line">	<span class="keyword">while</span> (*temp == <span class="string">' '</span>) &#123;</span><br><span class="line">		++temp;</span><br><span class="line">	&#125;</span><br><span class="line">	start = temp; <span class="comment">//求得头指针</span></span><br><span class="line">	temp = strIn + <span class="built_in">strlen</span>(strIn) - <span class="number">1</span>; <span class="comment">//得到原字符串最后一个字符的指针(不是'\0')</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%c\n"</span>, *temp);</span><br><span class="line">	<span class="keyword">while</span> (*temp == <span class="string">' '</span>) &#123;</span><br><span class="line">		--temp;</span><br><span class="line">	&#125;</span><br><span class="line">	end = temp; <span class="comment">//求得尾指针</span></span><br><span class="line">	<span class="keyword">for</span> (strIn = start; strIn &lt;= end; ) &#123;</span><br><span class="line">		*strOut++ = *strIn++;</span><br><span class="line">	&#125;</span><br><span class="line">	*strOut = <span class="string">'\0'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序代码转载自：<span class="exturl" data-url="aHR0cDovL3d3dy5kYXh1ZWl0LmNvbS9hcnRpY2xlLzE2MzA5Lmh0bWw=" title="http://www.daxueit.com/article/16309.html">daxueit.com<i class="fa fa-external-link"></i></span></p>
+<p>基础学的不扎实，期望以后能够努力学习。</p>
+<h2 id="浏览笔记"><a href="#浏览笔记" class="headerlink" title="浏览笔记"></a>浏览笔记</h2><p><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMTcyNjMwMi9yZW1vdmluZy1zcGFjZXMtZnJvbS1hLXN0cmluZy1pbi1j" title="https://stackoverflow.com/questions/1726302/removing-spaces-from-a-string-in-c">https://stackoverflow.com/questions/1726302/removing-spaces-from-a-string-in-c<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2Vla3Nmb3JnZWVrcy5vcmcvcmVtb3ZlLXNwYWNlcy1mcm9tLWEtZ2l2ZW4tc3RyaW5nLw==" title="https://www.geeksforgeeks.org/remove-spaces-from-a-given-string/">https://www.geeksforgeeks.org/remove-spaces-from-a-given-string/<i class="fa fa-external-link"></i></span></p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>我文笔并不是很好，如果用WordPress博客程序写我估计会逻辑混乱，排版糟糕。<br>哪位巨巨指点一下让我写的更好，感激不尽。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/Arduino/KRobot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/Arduino/KRobot/" class="post-title-link" itemprop="url">啃萝卜 - 一款优秀的Arduino图形化编程软件</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-07 09:31:28" itemprop="dateCreated datePublished" datetime="2018-01-07T09:31:28+08:00">2018-01-07</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:48" itemprop="dateModified" datetime="2018-12-03T01:13:48+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Arduino/" itemprop="url" rel="index"><span itemprop="name">Arduino</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>1.4k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近做的一个项目用到了Arduino IDE，在查找资料的时候无意中发现了一个优秀的图形化编程软件，叫“啃萝卜”，软件的英文名为“KRobot”。<br>抱着试一试的心态去安装和使用了这个软件之后，我觉得这个软件非常的优秀。可以说是良心之作了。<br>首先这个软件 Made in China 真的让我高兴和自豪，期待有一天它能够加上英文翻译，走向世界~<br>然后这款软件的UI非常的新颖和友好，好像是扁平化风格，相比WIN10的严谨的扁平化，它更加的新颖和友好，可惜我不是专业的前端我也难以形容和表达对软件UI的喜爱和满意。<br>提前贴一下他们的官网，大家进去能有一个直观的了解。<br><span class="exturl" data-url="aHR0cDovL3d3dy5rZW5yb2JvdC5jb20v" title="http://www.kenrobot.com/">www.kenrobot.com<i class="fa fa-external-link"></i></span><br>我晒一下软件的截图<br><img alt title="KRobot软件截图" data-src="https://files.itnote.me/images/20180107095935.png"><br>KRobot 不仅仅支持Windows操作系统，它还支持OS X，Linux，你甚至可以在浏览器上进行编程！</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Arduino/KRobot/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/NodeMCU/Smart-Garage-Project-Preparation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/NodeMCU/Smart-Garage-Project-Preparation/" class="post-title-link" itemprop="url">智能车库管理系统准备工作</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-03 20:24:40" itemprop="dateCreated datePublished" datetime="2018-01-03T20:24:40+08:00">2018-01-03</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:49" itemprop="dateModified" datetime="2018-12-03T01:13:49+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NodeMCU/" itemprop="url" rel="index"><span itemprop="name">NodeMCU</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>1.8k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>2 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天我抽时间设计了一下智能车库管理系统的电路。后期我会放出已经设计好的电路图。<br>目前我使用的是NodeMCU，上面有一个简单的微控制系统和WIFI模块，集成度高体积小，非常适合这个项目。<br>这次我为NodeMCU编写程序并烧录所使用的的IDE是Arduino，所以我需要提前了解一下，做一下准备工作。<br>经过了解，Arduino是支持C语言的，这样我就不用在学习新的语言和查找资料了。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/NodeMCU/Smart-Garage-Project-Preparation/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/JSBox/jsbox-getip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/JSBox/jsbox-getip/" class="post-title-link" itemprop="url">使用JSBox制作一个IP地址获取脚本</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-24 13:01:05" itemprop="dateCreated datePublished" datetime="2017-12-24T13:01:05+08:00">2017-12-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:48" itemprop="dateModified" datetime="2018-12-03T01:13:48+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JSBox/" itemprop="url" rel="index"><span itemprop="name">JSBox</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>2.4k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>2 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>前阵子我在少数派看到了钟大写的JSBox介绍文章，才了解到钟大新写了一个JSBox APP。<br>这让我想起了半年前Pin支持JS脚本时，我为了图新鲜写了一个IP地址获取脚本的事。<br>可惜当时Pin才刚刚支持JS脚本，有一些UI方面的BUG，对我写的脚本并不是很友好。今天我从Pin交流群的群文件中下载了我以前写的脚本，发现勤劳的钟大将这些BUG都修复了。</p>
+<h2 id="JSBox简介"><a href="#JSBox简介" class="headerlink" title="JSBox简介"></a>JSBox简介</h2><p>我很懒，直接引用一下钟大对JSBox的介绍吧。<br>文章来源：<span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC80MjM2MQ==" title="https://sspai.com/post/42361">少数派 - JSBox: 一个创造工具的工具<i class="fa fa-external-link"></i></span><br>JSBox 是一个可以用来运行 JavaScript 脚本的 iOS 应用，你可以通过他来执行标准的 JavaScript 脚本。</p>
+<p>这种执行不是指跑在浏览器上，而是执行在一个完全原生的环境，效率很高。</p>
+<p>并且我们提供了很多 iOS 原生的接口，这意味着你可以通过他做很多事情，包括但不限于：</p>
+<ul>
+<li>写一个用来查询汇率的脚本；</li>
+<li>写一个用于计算小费的脚本；</li>
+<li>通过接口实现一个小小的应用，提供丰富的界面；</li>
+<li>写一个文本收藏工具，用于收藏常用的文字；</li>
+<li>写一个下载 Twitter 视频的小工具；<br>……</li>
+</ul>
+<p>其实 JSBox 是完完全全可编程的一个应用，他能做很多事情，所限制产出的往往只是动手能力。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/JSBox/jsbox-getip/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/NodeMCU/Garage-Management-System/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/NodeMCU/Garage-Management-System/" class="post-title-link" itemprop="url">基于NodeMCU制作的智能车库管理系统</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-12 23:21:39" itemprop="dateCreated datePublished" datetime="2017-12-12T23:21:39+08:00">2017-12-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:46" itemprop="dateModified" datetime="2018-12-03T01:13:46+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NodeMCU/" itemprop="url" rel="index"><span itemprop="name">NodeMCU</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>849</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一位群友求助群里的朋友，期望能够完善一下他自己的车库管理模块。<br>他想让他自己的<code>车进车库之前，车库门就能自动打开，灯也自动亮起来。</code><br>群里的数位朋友们对此展开了讨论。开始我们的想法很简单，弄一个433m无线模块遥控就行了，只要车靠近，就能接收到433m无线模块的信号，直接打开车门。这是一个非常简单粗暴的一种方法，有不少不靠谱的地方。</p>
+<h2 id="车库管理系统的完善"><a href="#车库管理系统的完善" class="headerlink" title="车库管理系统的完善"></a>车库管理系统的完善</h2><p>我和他讨论了一下，做了下面的完善。</p>
+<ol>
+<li>精准确定车的位置 - 使用GPS模块。</li>
+<li>判断车辆进出 - 使用2组激光传感器，门边一组，车库内一组</li>
+<li>稳定的中央处理器 - 使用带有WIFI模块的NodeMCU</li>
+<li>稳定的信号传输 - 正好双十二搞活动，买了个大功率的433m无线模块</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/NodeMCU/Garage-Management-System/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/Docker/Centos7-install-docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/Docker/Centos7-install-docker/" class="post-title-link" itemprop="url">Centos7 安装 Docker</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-11 21:54:00" itemprop="dateCreated datePublished" datetime="2017-12-11T21:54:00+08:00">2017-12-11</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:44" itemprop="dateModified" datetime="2018-12-03T01:13:44+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>865</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>我最近刚刚开始学习Docker，因为目前有一些项目需要用到它。<br>我在这里记一下笔记，因为我每次搜索安装教程和看官方文档挺烦的。</p>
+<h2 id="使用脚本自动安装Docker"><a href="#使用脚本自动安装Docker" class="headerlink" title="使用脚本自动安装Docker"></a>使用脚本自动安装Docker</h2><p>进入ssh，运行下面的命令即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">sudo sh get-docker.sh --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动-Docker-CE"><a href="#启动-Docker-CE" class="headerlink" title="启动 Docker CE"></a>启动 Docker CE</h2><p>运行下面的命令启动 Docker CE并将其加入开机启动项</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br><span class="line">sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Docker/Centos7-install-docker/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/Linux/linux-untar-tar-bz2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/Linux/linux-untar-tar-bz2/" class="post-title-link" itemprop="url">Linux下解压.tar.bz2格式的压缩包</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-11 00:59:25" itemprop="dateCreated datePublished" datetime="2017-12-11T00:59:25+08:00">2017-12-11</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:48" itemprop="dateModified" datetime="2018-12-03T01:13:48+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>744</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天我下载了一个文件，是<code>.tar.bz2</code>格式的<br>但是我用在网上找的解压命令无论怎么样都无法解压，耐心查看了一下错误输出信息，原来缺少<code>bzip2</code>组件导致的。</p>
+<h2 id="安装bzip2组件"><a href="#安装bzip2组件" class="headerlink" title="安装bzip2组件"></a>安装bzip2组件</h2><p>Centos系统运行下面的命令安装bzip2：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install bzip2 -y</span><br><span class="line">apt-get -y install</span><br></pre></td></tr></table></figure>
+
+<p>Debian/Ubuntu 则用下面的命令安装bzip2：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install bzip2 -y</span><br><span class="line">apt-get -y install</span><br></pre></td></tr></table></figure>
+
+<h2 id="解压命令"><a href="#解压命令" class="headerlink" title="解压命令"></a>解压命令</h2><p>老版本的linux要两步，一步是解压缩，一步是解包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bzip2 -d file.tar.bz2 <span class="comment">##将文件解压成file.tar</span></span><br><span class="line">tar -xvf file.tar <span class="comment">##解包</span></span><br></pre></td></tr></table></figure>
+
+<p>解完之后会出现多一个文件夹 file<br>或者直接执行下面的命令解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -jxvf file.tar</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Linux/linux-untar-tar-bz2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/Hexo/hexo-add-categories/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/Hexo/hexo-add-categories/" class="post-title-link" itemprop="url">hexo 添加分类并在菜单中显示</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-10 23:41:16" itemprop="dateCreated datePublished" datetime="2017-12-10T23:41:16+08:00">2017-12-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:46" itemprop="dateModified" datetime="2018-12-03T01:13:46+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>569</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>我朋友和我也一样使用了Hexo，他曾经问过我怎么添加分类。我却不好回答，因为网上教程不少，我也是参考网上教程来的。<br>其实Hexo添加分类很简单的。</p>
+<h2 id="新建页面"><a href="#新建页面" class="headerlink" title="新建页面"></a>新建页面</h2><p>新建一个页面，命名为 <code>categories</code> 。命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<h2 id="编辑页面"><a href="#编辑页面" class="headerlink" title="编辑页面"></a>编辑页面</h2><p>编辑刚新建的页面，将页面的类型设置为 <code>categories</code> ，主题将自动为这个页面显示所有分类。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">分类</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2014</span><span class="bullet">-12</span><span class="bullet">-22</span> <span class="number">12</span><span class="string">:39:04</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"categories"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="为分类关闭评论"><a href="#为分类关闭评论" class="headerlink" title="为分类关闭评论"></a>为分类关闭评论</h2><p>注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 <code>comments</code> 并将值设置为 <code>false</code>，如：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">分类</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2014</span><span class="bullet">-12</span><span class="bullet">-22</span> <span class="number">12</span><span class="string">:39:04</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"categories"</span></span><br><span class="line"><span class="attr">comments:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="在菜单中添加链接"><a href="#在菜单中添加链接" class="headerlink" title="在菜单中添加链接"></a>在菜单中添加链接</h2><p>在菜单中添加链接。编辑主题的 <code>_config.yml</code> ，将 <code>menu</code> 中的 <code>categories: /categories</code> 注释去掉，如下:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">/categories</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">/archives</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的文章也是我转载的<br>Hexo Wiki:<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0L3dpa2kvJUU1JTg4JTlCJUU1JUJCJUJBJUU1JTg4JTg2JUU3JUIxJUJCJUU5JUExJUI1JUU5JTlEJUEy" title="https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA%E5%88%86%E7%B1%BB%E9%A1%B5%E9%9D%A2">创建分类页面<i class="fa fa-external-link"></i></span></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/Hexo/hexo-optimization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/Hexo/hexo-optimization/" class="post-title-link" itemprop="url">hexo next主题优化</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-09 23:41:16" itemprop="dateCreated datePublished" datetime="2017-12-09T23:41:16+08:00">2017-12-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:47" itemprop="dateModified" datetime="2018-12-03T01:13:47+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>2.8k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>3 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天我对Hexo进行了一些优化，需要进行代码压缩。在网上找了很多的教程，大多数都使用gulp这个插件进行代码压缩，但我不建议大家使用。<br>因为我使用的过程中发现这个可能无法压缩部分JS。导致出错，原因是较旧的uglify不支持ES6。<br>所以我个人建议大家使用hexo-all-minifier</p>
+<h2 id="hexo-all-minifier-介绍"><a href="#hexo-all-minifier-介绍" class="headerlink" title="hexo-all-minifier 介绍"></a>hexo-all-minifier 介绍</h2><p>hexo-all-minifier项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoZW56aHV0aWFuL2hleG8tYWxsLW1pbmlmaWVy" title="https://github.com/chenzhutian/hexo-all-minifier">在Github查看hexo-all-minifier项目<i class="fa fa-external-link"></i></span><br>引用一下官方说明：</p>
+<p>Integrate all the official minifier plugins of HEXO and a imagemin plugin:<br>译：本插件集成了Hexo官方minifier插件和imagemin插件：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWh0bWwtbWluaWZpZXI=" title="https://github.com/hexojs/hexo-html-minifier">hexo-html-minifier<i class="fa fa-external-link"></i></span>, 基于 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2thbmdheC9odG1sLW1pbmlmaWVy" title="https://github.com/kangax/html-minifier">HTMLMinifier<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWNsZWFuLWNzcw==" title="https://github.com/hexojs/hexo-clean-css">hexo-clean-css<i class="fa fa-external-link"></i></span>, 基于 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pha3VicGF3bG93aWN6L2NsZWFuLWNzcw==" title="https://github.com/jakubpawlowicz/clean-css">clean-css<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLXVnbGlmeQ==" title="https://github.com/hexojs/hexo-uglify">hexo-uglify<i class="fa fa-external-link"></i></span>, 基于 <span class="exturl" data-url="aHR0cDovL2xpc3BlcmF0b3IubmV0L3VnbGlmeWpzLw==" title="http://lisperator.net/uglifyjs/">UglifyJS<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZzZXZlbnRlci9oZXhvLWltYWdlbWlu" title="https://github.com/vseventer/hexo-imagemin">hexo-imagemin<i class="fa fa-external-link"></i></span>, 基于 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ltYWdlbWluL2ltYWdlbWlu" title="https://github.com/imagemin/imagemin">imagemin<i class="fa fa-external-link"></i></span></li>
+</ul>
+<h2 id="hexo-all-minifier-安装"><a href="#hexo-all-minifier-安装" class="headerlink" title="hexo-all-minifier 安装"></a>hexo-all-minifier 安装</h2><p>在hexo目录中运行下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-all-minifier --save</span><br></pre></td></tr></table></figure>
+
+<p>在hexo配置文件中插入下面的代码</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">all_minifier:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>执行代码刷新，查看效果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Hexo/hexo-optimization/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/Android/use-android-first/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/Android/use-android-first/" class="post-title-link" itemprop="url">“华为畅玩4”安卓手机使用感受</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-09 21:53:21" itemprop="dateCreated datePublished" datetime="2017-12-09T21:53:21+08:00">2017-12-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:50" itemprop="dateModified" datetime="2018-12-03T01:13:50+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>1.1k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>我有3个电信卡，所以我最近要弄一台备用的手机。我在转转那找到一台华为畅玩4的安卓手机，同城面交，花了259元。我说一下我用这台手机的感受吧。</p>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>这是使用3年iPhone6之后和259元买的“华为”安卓机做对比后的感受，不能作为参考！<br>这篇文章写于2017年12月9日，这时候的iPhone6和华为畅玩4都已经算是老手机了！<br>如果对本文有哪方面不同意或者有看法和意见，请在下方留言。无法留言的请自备梯再上本站。</p>
+<h2 id="初试"><a href="#初试" class="headerlink" title="初试"></a>初试</h2><p>拿到手机，我也懒得刷机，直接恢复了出厂设置。因为我看那卖家应该是个会玩的，刷的基带应该挺稳，系统也应该是最新的。<br>恢复好系统后，出厂设置好后，开始使用。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/Android/use-android-first/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mt.r</p>
+  <div class="site-description motion-element" itemprop="description">记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL210cnVjYw==" title="GitHub &rarr; https://github.com/mtrucc"><i class="fa fa-fw fa-github"></i></span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOm10cnVjY0BnbWFpbC5jb20=" title="E-Mail &rarr; mailto:mtrucc@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5iZWlhbi5taWl0Lmdvdi5jbg==">京ICP备19000129号-1 </span>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mt.r</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">60k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">55 分钟</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
+      <div class="reading-progress-bar"></div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/pjax/pjax.min.js?v=0.2.8"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script><script src="/js/bookmark.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+  
+
+
+  
+
+    </div>
+    <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.sidebar-inner',
+    '#pjax'
+  ],
+  switches: {
+    '.sidebar-inner': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+window.addEventListener('pjax:send', () => {
+  $('.sidebar-inner').stop().fadeTo('fast', 0);
+});
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    $(element).parent().append($(element).remove());
+  });
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  $('.sidebar-inner .motion-element').css('opacity', 1);
+  $('.sidebar-inner').fadeTo('fast', 1);
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+</body>
+</html>

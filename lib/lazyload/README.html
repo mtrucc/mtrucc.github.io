@@ -1,0 +1,35 @@
+<h1 id="Hexo-NexT-Title"><a href="#Hexo-NexT-Title" class="headerlink" title="Hexo NexT Title"></a>Hexo NexT Title</h1><p><a href="https://theme-next.org"><img src="https://img.shields.io/badge/NexT-v7.3.0+-blue.svg" alt="Theme"></a><br><img src="https://img.shields.io/github/release/theme-next/hexo-next-title.svg" alt="GitHub release"></p>
+<p>Change to a different title when window is no longer in focus.</p>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><pre><code class="bash">npm install --save theme-next/hexo-next-title<span class="comment">#last-release</span></code></pre>
+<h2 id="Configure"><a href="#Configure" class="headerlink" title="Configure"></a>Configure</h2><p>You can config those in both <strong>hexo</strong> or <strong>theme</strong> <code>_config.yml</code>.</p>
+<pre><code class="yml"><span class="comment"># Change title and favicon when window is hidden and visible.</span>
+<span class="attr">title_change:</span>
+<span class="attr">  enable:</span> <span class="literal">false</span>
+
+  <span class="comment"># Enabling this feature on non-desktop devices may not be a good choice, but it depends on you.</span>
+<span class="attr">  onmobile:</span> <span class="literal">false</span>
+
+  <span class="comment"># Enable random title or not.</span>
+  <span class="comment"># Basically `random: true` means you have several titles to display and `random: false` means you have only one title to display.</span>
+  <span class="comment"># When `random: true`, YOU MUST FOLLOW the format which has been commented in two title options below.</span>
+  <span class="comment"># When `random: false`, please fill in the same line of the title option, like `title: one title`.</span>
+<span class="attr">  random:</span> <span class="literal">false</span>
+
+  <span class="comment"># Restore the original title after the specified time in milliseconds.</span>
+<span class="attr">  timeout:</span> <span class="number">2019</span>
+
+  <span class="comment"># Options when window is hidden.</span>
+<span class="attr">  hidden:</span>
+<span class="attr">    favicon:</span> <span class="string">/images/favicon-32x32-next.png</span>
+<span class="attr">    title:</span>
+      <span class="comment">#- 404</span>
+      <span class="comment">#- φ(*￣0￣)</span>
+      <span class="comment">#- Waiting for you.</span>
+
+  <span class="comment"># Options when window is visible.</span>
+<span class="attr">  visible:</span>
+<span class="attr">    favicon:</span> <span class="string">/images/favicon-32x32-next.png</span>
+<span class="attr">    title:</span>
+      <span class="comment">#- 200</span>
+      <span class="comment">#- (✿◡‿◡)</span>
+      <span class="comment">#- Welcome back!</span></code></pre>

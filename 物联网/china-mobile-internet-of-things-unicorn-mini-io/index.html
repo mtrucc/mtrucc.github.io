@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"save":"auto"},
+    fancybox: true,
+    mediumzoom: true,
+    lazyload: true,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="用了一阵麒麟版，我觉得很有意思。我用麒麟版实验了温湿度例程，流水灯例程。但是找了半天没有找到开关量输入检测的。而我需要检测外置传感器信号。我有一个红外线避障传感器和一个人体热释传感器，都是满足条件输出高电平的，然后单片机就需要在检测到高电平后，执行某些动作（程序）。我知道开发板是用的stm32芯片，所以我在网上找了一下相关lib（也就是库），看看能不能直接调用。还真找到现成的了。这是我找到的一些资">
+<meta name="keywords" content="中国移动,物联网,麒麟版,开关量,输入检测,iot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中国移动物联网麒麟版 mini 开关量输入检测">
+<meta property="og:url" content="https://trycoding.fun/物联网/china-mobile-internet-of-things-unicorn-mini-io/index.html">
+<meta property="og:site_name" content="TRY CODING FUN">
+<meta property="og:description" content="用了一阵麒麟版，我觉得很有意思。我用麒麟版实验了温湿度例程，流水灯例程。但是找了半天没有找到开关量输入检测的。而我需要检测外置传感器信号。我有一个红外线避障传感器和一个人体热释传感器，都是满足条件输出高电平的，然后单片机就需要在检测到高电平后，执行某些动作（程序）。我知道开发板是用的stm32芯片，所以我在网上找了一下相关lib（也就是库），看看能不能直接调用。还真找到现成的了。这是我找到的一些资">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-02T17:13:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="中国移动物联网麒麟版 mini 开关量输入检测">
+<meta name="twitter:description" content="用了一阵麒麟版，我觉得很有意思。我用麒麟版实验了温湿度例程，流水灯例程。但是找了半天没有找到开关量输入检测的。而我需要检测外置传感器信号。我有一个红外线避障传感器和一个人体热释传感器，都是满足条件输出高电平的，然后单片机就需要在检测到高电平后，执行某些动作（程序）。我知道开发板是用的stm32芯片，所以我在网上找了一下相关lib（也就是库），看看能不能直接调用。还真找到现成的了。这是我找到的一些资">
+  <link rel="canonical" href="https://trycoding.fun/物联网/china-mobile-internet-of-things-unicorn-mini-io/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>中国移动物联网麒麟版 mini 开关量输入检测 | TRY CODING FUN</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TRY CODING FUN</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">重拾编程的乐趣</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+      <a class="book-mark-link book-mark-link-fixed fa fa-bookmark" href="#"></a>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/物联网/china-mobile-internet-of-things-unicorn-mini-io/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">中国移动物联网麒麟版 mini 开关量输入检测
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-28 21:53:21" itemprop="dateCreated datePublished" datetime="2017-11-28T21:53:21+08:00">2017-11-28</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:45" itemprop="dateModified" datetime="2018-12-03T01:13:45+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/物联网/" itemprop="url" rel="index"><span itemprop="name">物联网</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>2.1k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>2 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>用了一阵麒麟版，我觉得很有意思。<br>我用麒麟版实验了温湿度例程，流水灯例程。<br>但是找了半天没有找到开关量输入检测的。而我需要检测外置传感器信号。<br>我有一个红外线避障传感器和一个人体热释传感器，都是满足条件输出高电平的，然后单片机就需要在检测到高电平后，执行某些动作（程序）。<br>我知道开发板是用的stm32芯片，所以我在网上找了一下相关lib（也就是库），看看能不能直接调用。还真找到现成的了。<br>这是我找到的一些资料，在这里做一下整理。</p>
+<a id="more"></a>
+
+<h2 id="GPIO输入"><a href="#GPIO输入" class="headerlink" title="GPIO输入"></a>GPIO输入</h2><p>当GPIO连接了外部传感器，而传感器的信号是开关量的时候，GPIO可能需要去轮询输入的状态是高是低，这时候GPIO就需要当做输入来用。<br>按键的动作可以用来模拟传感器的动作，按键通过上拉电阻接到高电平。当按键按下时，会使相应的GPIO管脚变成低电平。配置这些GPIO引脚为上拉模式，在没有收到信号的情况下，保持这些GPIO口为高电平。<br>GPIO的库函数也为我们提供了读取某指定端口管脚的输入– GPIO_ReadInputDataBit 正是这样一个函数</p>
+<p>函数名 GPIO_ReadInputDataBit<br>函数原形 u8 GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, u16 GPIO_Pin)<br>功能描述 读取指定端口管脚的输入<br>输入参数1 GPIOx ：x 可以是A，B ，C ，D 或者E，来选择GPIO外设<br>输入参数2 GPIO_Pin：待读取的端口位<br>返回值 输入端口管脚值，高或者低<br>u8 ReadValue;<br>ReadValue = GPIO_ReadInputDataBit(GPIOx, GPIO_Pin_x);<br>返回值ReadValue反应了GPIO口的高低状态。</p>
+<p>上面的就是我找的资料了，非常实用。然后我又找了一些现成的例程，修改了一下就可以直接上手使用。</p>
+<h2 id="开关量检测程序"><a href="#开关量检测程序" class="headerlink" title="开关量检测程序"></a>开关量检测程序</h2><p>首先要初始化一下IO口，初始化为输入模式</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @brief 初始化按键</span></span><br><span class="line"><span class="comment"> * @param 无</span></span><br><span class="line"><span class="comment"> * @retval 无</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Key_GPIO_Config</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	GPIO_InitTypeDef GPIO_InitStructure;</span><br><span class="line">	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);</span><br><span class="line">	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0; <span class="comment">// 选择按键引脚PA0 </span></span><br><span class="line">	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; <span class="comment">// 设置引脚模式为浮空输入</span></span><br><span class="line">	GPIO_Init(GPIOA, &amp;amp;GPIO_InitStructure); <span class="comment">// 初始化按键</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在main()中直接使用函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义控制LED的引脚</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LED_TOGGLE LED_Control(GPIOB, GPIO_Pin_0)</span></span><br><span class="line"><span class="comment">// 使用带参宏输出LED灯的另一种状态</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LED_Control(GPIOx, GPIO_Pin) &#123;GPIOx-&amp;gt;ODR ^= GPIO_Pin;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">uint8_t</span> SaveStatus = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">uint8_t</span> State;</span><br><span class="line"></span><br><span class="line">  LED_GPIO_Config();</span><br><span class="line">  Key_GPIO_Config();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    State = Key_DETECTOR(GPIOA, GPIO_Pin_0);</span><br><span class="line">    <span class="keyword">if</span> (SaveStatus != State)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (State == <span class="number">1</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        LED_TOGGLE;</span><br><span class="line">      &#125;</span><br><span class="line">      SaveStatus = State;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="笔记整理"><a href="#笔记整理" class="headerlink" title="笔记整理"></a>笔记整理</h2><p>我浏览了很多的网站，上面的部分内容就来自这些网站，谢谢这几位朋友给我带来的帮助。<br>然后我整理了一下这些网站，如果大家不是很清楚，可以进来更多的了解。</p>
+<p><span class="exturl" data-url="aHR0cDovL2Jsb2cuY3Nkbi5uZXQva2V2aW5oZy9hcnRpY2xlL2RldGFpbHMvMTc0OTAyNzM=" title="http://blog.csdn.net/kevinhg/article/details/17490273">http://blog.csdn.net/kevinhg/article/details/17490273<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd2pqb250aGV3YXkvYXJ0aWNsZS9kZXRhaWxzLzkzMDIxODk=" title="http://blog.csdn.net/wjjontheway/article/details/9302189">http://blog.csdn.net/wjjontheway/article/details/9302189<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDY1NzIxOS9hcnRpY2xlL2RldGFpbHMvNDE4MTA3NzE=" title="http://blog.csdn.net/u010657219/article/details/41810771">http://blog.csdn.net/u010657219/article/details/41810771<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcGVyc2lzdHZvbnlhby9hcnRpY2xlL2RldGFpbHMvMzg1NDI4NDc=" title="http://blog.csdn.net/persistvonyao/article/details/38542847">http://blog.csdn.net/persistvonyao/article/details/38542847<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHVhbmdjaGlqdW4xMS9hcnRpY2xlL2RldGFpbHMvNTMzMjE1NjY=" title="http://blog.csdn.net/huangchijun11/article/details/53321566">http://blog.csdn.net/huangchijun11/article/details/53321566<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yMzY2MjMwMT9yZWZlcj1zdG0zMg==" title="https://zhuanlan.zhihu.com/p/23662301?refer=stm32">https://zhuanlan.zhihu.com/p/23662301?refer=stm32<i class="fa fa-external-link"></i></span></p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="https://files.itnote.me/images/wechat.png" alt="Mt.r 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="https://files.itnote.me/images/alipay.png" alt="Mt.r 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Mt.r</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://trycoding.fun/物联网/china-mobile-internet-of-things-unicorn-mini-io/" title="中国移动物联网麒麟版 mini 开关量输入检测">https://trycoding.fun/物联网/china-mobile-internet-of-things-unicorn-mini-io/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/中国移动/" rel="tag"># 中国移动</a>
+            
+              <a href="/tags/物联网/" rel="tag"># 物联网</a>
+            
+              <a href="/tags/麒麟版/" rel="tag"># 麒麟版</a>
+            
+              <a href="/tags/Iot/" rel="tag"># Iot</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/Nginx/nginx-proxy/" rel="next" title="Nginx 反向代理 Google Font、Ajax 和 Gravatar 头像">
+                  <i class="fa fa-chevron-left"></i> Nginx 反向代理 Google Font、Ajax 和 Gravatar 头像
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/NodeMCU/esp8266-oled-display/" rel="prev" title="NodeMCU/ESP8266 驱动 OLED 0.96″ 128×64 I2C SSD1306 显示">
+                  NodeMCU/ESP8266 驱动 OLED 0.96″ 128×64 I2C SSD1306 显示 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="gitalk-container"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mt.r</p>
+  <div class="site-description motion-element" itemprop="description">记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL210cnVjYw==" title="GitHub &rarr; https://github.com/mtrucc"><i class="fa fa-fw fa-github"></i></span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOm10cnVjY0BnbWFpbC5jb20=" title="E-Mail &rarr; mailto:mtrucc@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GPIO输入"><span class="nav-number">1.</span> <span class="nav-text">GPIO输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开关量检测程序"><span class="nav-number">2.</span> <span class="nav-text">开关量检测程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记整理"><span class="nav-number">3.</span> <span class="nav-text">笔记整理</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5iZWlhbi5taWl0Lmdvdi5jbg==">京ICP备19000129号-1 </span>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mt.r</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">60k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">55 分钟</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
+      <div class="reading-progress-bar"></div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/pjax/pjax.min.js?v=0.2.8"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script><script src="/js/bookmark.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'b5fd926dd425f1fc5098',
+      clientSecret: '7866f7e585d3f6b416ea7ca74e65f153b7ba2a99',
+      repo: 'mtrucc.github.io',
+      owner: 'mtrucc',
+      admin: ['mtrucc'],
+      id: '1ac618f1261ec08ae34501305578ab17',
+        language: window.navigator.language || window.navigator.userLanguage,
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+    <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.sidebar-inner',
+    '#pjax'
+  ],
+  switches: {
+    '.sidebar-inner': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+window.addEventListener('pjax:send', () => {
+  $('.sidebar-inner').stop().fadeTo('fast', 0);
+});
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    $(element).parent().append($(element).remove());
+  });
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  $('.sidebar-inner .motion-element').css('opacity', 1);
+  $('.sidebar-inner').fadeTo('fast', 1);
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+</body>
+</html>

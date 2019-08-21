@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: true,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"save":"auto"},
+    fancybox: true,
+    mediumzoom: true,
+    lazyload: true,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="前一阵子我其实是想用Google drive + incron的方式自动提交博客，然而碰到了一些问题，Goole drive可以同步文件夹，但不能自动同步文件夹，并且没有git这样优秀的版本控制。而我又不想自己手动上传文章以及拉取文章，拉取之后还得手工hexo g，太麻烦了。写定时拉取，自动更新的确可以，但是这样太没逼格了。于是我就查资料，发现了git有webhooks。 什么是Webhooks先">
+<meta name="keywords" content="Webhoooks,Git自动拉取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Git的webhooks进行自动化部署">
+<meta property="og:url" content="https://trycoding.fun/Git/git-webhooks/index.html">
+<meta property="og:site_name" content="TRY CODING FUN">
+<meta property="og:description" content="前一阵子我其实是想用Google drive + incron的方式自动提交博客，然而碰到了一些问题，Goole drive可以同步文件夹，但不能自动同步文件夹，并且没有git这样优秀的版本控制。而我又不想自己手动上传文章以及拉取文章，拉取之后还得手工hexo g，太麻烦了。写定时拉取，自动更新的确可以，但是这样太没逼格了。于是我就查资料，发现了git有webhooks。 什么是Webhooks先">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-02T17:13:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Git的webhooks进行自动化部署">
+<meta name="twitter:description" content="前一阵子我其实是想用Google drive + incron的方式自动提交博客，然而碰到了一些问题，Goole drive可以同步文件夹，但不能自动同步文件夹，并且没有git这样优秀的版本控制。而我又不想自己手动上传文章以及拉取文章，拉取之后还得手工hexo g，太麻烦了。写定时拉取，自动更新的确可以，但是这样太没逼格了。于是我就查资料，发现了git有webhooks。 什么是Webhooks先">
+  <link rel="canonical" href="https://trycoding.fun/Git/git-webhooks/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>使用Git的webhooks进行自动化部署 | TRY CODING FUN</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TRY CODING FUN</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">重拾编程的乐趣</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+      <a class="book-mark-link book-mark-link-fixed fa fa-bookmark" href="#"></a>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://trycoding.fun/Git/git-webhooks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mt.r">
+      <meta itemprop="description" content="记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TRY CODING FUN">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">使用Git的webhooks进行自动化部署
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-29 23:43:59" itemprop="dateCreated datePublished" datetime="2018-04-29T23:43:59+08:00">2018-04-29</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-03 01:13:46" itemprop="dateModified" datetime="2018-12-03T01:13:46+08:00">2018-12-03</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>3.4k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>3 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>前一阵子我其实是想用Google drive + incron的方式自动提交博客，然而碰到了一些问题，Goole drive可以同步文件夹，但不能自动同步文件夹，并且没有git这样优秀的版本控制。<br>而我又不想自己手动上传文章以及拉取文章，拉取之后还得手工hexo g，太麻烦了。<br>写定时拉取，自动更新的确可以，但是这样太没逼格了。<br>于是我就查资料，发现了git有webhooks。</p>
+<h2 id="什么是Webhooks"><a href="#什么是Webhooks" class="headerlink" title="什么是Webhooks"></a>什么是Webhooks</h2><p>先放几个官方的说明：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuZ2l0aHViLmNvbS93ZWJob29rcy8=" title="https://developer.github.com/webhooks/">Github Webhooks<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmdpdGxhYi5jb20vZWUvdXNlci9wcm9qZWN0L2ludGVncmF0aW9ucy93ZWJob29rcy5odG1s" title="https://docs.gitlab.com/ee/user/project/integrations/webhooks.html">Gitlab Webhooks<i class="fa fa-external-link"></i></span></li>
+</ul>
+<p>简单概括一下（译自Github Webhooks）：</p>
+<ul>
+<li>Webhooks允许我们建立关于项目的在GitHub上的事件集成.当事件触发的时候,会通过HTTP POST的方式,向我们的服务器发送请求.我们可以用这个服务器去更新外部跟踪,触发CI build,更新备份镜像,部署到生产服务器.</li>
+<li>每个Webhook都可以安装在一个项目或者组织上,安装完毕之后,就可以随着订阅的时间进行触发.</li>
+<li>每个项目的每个事件最多可以安装20个Webhook.</li>
+</ul>
+<h2 id="Webhooks-脚本"><a href="#Webhooks-脚本" class="headerlink" title="Webhooks 脚本"></a>Webhooks 脚本</h2><p>Webhook脚本实现可以用PHP、NodeJS等，本文仅介绍PHP脚本，笔者也用的这个脚本</p>
+<a id="more"></a>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 本地仓库路径</span></span><br><span class="line">$local = <span class="string">'/var/www/html/'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 安全验证字符串，为空则不验证</span></span><br><span class="line">$token = <span class="string">'123456'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果启用验证，并且验证失败，返回错误</span></span><br><span class="line">$httpToken = <span class="keyword">isset</span>($_SERVER[<span class="string">'HTTP_X_GITLAB_TOKEN'</span>]) ? $_SERVER[<span class="string">'HTTP_X_GITLAB_TOKEN'</span>] : <span class="string">''</span>;</span><br><span class="line"><span class="keyword">if</span> ($token &amp;&amp; $httpToken != $token) &#123;</span><br><span class="line">    header(<span class="string">'HTTP/1.1 403 Permission Denied'</span>);</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'Permission denied.'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果仓库目录不存在，返回错误</span></span><br><span class="line"><span class="keyword">if</span> (!is_dir($local)) &#123;</span><br><span class="line">    header(<span class="string">'HTTP/1.1 500 Internal Server Error'</span>);</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'Local directory is missing'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果请求体内容为空，返回错误</span></span><br><span class="line">$payload = file_get_contents(<span class="string">'php://input'</span>);</span><br><span class="line"><span class="keyword">if</span> (!$payload) &#123;</span><br><span class="line">    header(<span class="string">'HTTP/1.1 400 Bad Request'</span>);</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'HTTP HEADER or POST is missing.'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 这里有几点需要注意：</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 1.确保PHP正常执行系统命令。写一个PHP文件，内容：</span></span><br><span class="line"><span class="comment"> * `&lt;?php shell_exec('ls -la')`</span></span><br><span class="line"><span class="comment"> * 在通过浏览器访问这个文件，能够输出目录结构说明PHP可以运行系统命令。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 2、PHP一般使用www-data或者nginx用户运行，PHP通过脚本执行系统命令也是用这个用户，</span></span><br><span class="line"><span class="comment"> * 所以必须确保在该用户家目录（一般是/home/www-data或/home/nginx）下有.ssh目录和</span></span><br><span class="line"><span class="comment"> * 一些授权文件，以及git配置文件，如下：</span></span><br><span class="line"><span class="comment"> * ```</span></span><br><span class="line"><span class="comment"> * + .ssh</span></span><br><span class="line"><span class="comment"> *   - authorized_keys</span></span><br><span class="line"><span class="comment"> *   - config</span></span><br><span class="line"><span class="comment"> *   - id_rsa</span></span><br><span class="line"><span class="comment"> *   - id_rsa.pub</span></span><br><span class="line"><span class="comment"> *   - known_hosts</span></span><br><span class="line"><span class="comment"> * - .gitconfig</span></span><br><span class="line"><span class="comment"> * ```</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 3.在执行的命令后面加上2&gt;&amp;1可以输出详细信息，确定错误位置</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 4.git目录权限问题。比如：</span></span><br><span class="line"><span class="comment"> * `fatal: Unable to create '/data/www/html/awaimai/.git/index.lock': Permission denied`</span></span><br><span class="line"><span class="comment"> * 那就是PHP用户没有写权限，需要给目录授予权限:</span></span><br><span class="line"><span class="comment"> * ``</span></span><br><span class="line"><span class="comment"> * sudo chown -R :www-data /data/www/html/awaimai`</span></span><br><span class="line"><span class="comment"> * sudo chmod -R g+w /data/www/html/awaimai</span></span><br><span class="line"><span class="comment"> * ```</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 5.SSH认证问题。如果是通过SSH认证，有可能提示错误：</span></span><br><span class="line"><span class="comment"> * `Could not create directory '/.ssh'.`</span></span><br><span class="line"><span class="comment"> * 或者</span></span><br><span class="line"><span class="comment"> * `Host key verification failed.`</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">echo</span> shell_exec(<span class="string">"cd &#123;$local&#125; &amp;&amp; git pull 2&gt;&amp;1"</span>);</span><br><span class="line"><span class="keyword">die</span>(<span class="string">"done "</span> . date(<span class="string">'Y-m-d H:i:s'</span>, time()));</span><br></pre></td></tr></table></figure>
+
+<h2 id="Webhooks-配置"><a href="#Webhooks-配置" class="headerlink" title="Webhooks 配置"></a>Webhooks 配置</h2><p>像图片中这样设置就可以了<br><img alt title="Github的配置" data-src="https://files.itnote.me/images/github-webhooks-1.png"><br><img alt title="Gitlab的配置" data-src="https://files.itnote.me/images/gitlab-webhooks-1.png"><br><img alt title="Gitlab的配置" data-src="https://files.itnote.me/images/gitee-webhooks-1.png"></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>如果不能正常的拉取，你可以先使用下面的php程序进行测试。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$output = shell_exec(<span class="string">'ls -lart'</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;pre&gt;$output&lt;/pre&gt;"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果网页不能够输出你当前的文件夹下的文件，说明shell_exe()函数被禁用了，你需要修改php.ini，启用该函数</p>
+<p>然后用下面的php程序接着测试</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 本地仓库路径</span></span><br><span class="line">$local = <span class="string">'/var/www/html/'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> shell_exec(<span class="string">"cd &#123;$local&#125; &amp;&amp; git pull 2&gt;&amp;1"</span>);</span><br><span class="line"><span class="keyword">die</span>(<span class="string">"done "</span> . date(<span class="string">'Y-m-d H:i:s'</span>, time()));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>看看输出的信息。在执行的命令后面加上2&gt;&amp;1可以输出详细信息，确定错误位置。</p>
+<p>一般情况下有3种错误：</p>
+<ul>
+<li>权限不足</li>
+<li>ssh认证错误</li>
+<li>不能读写文件</li>
+</ul>
+<p>对于权限不足，你需要给网站www或则nginx用户组权限，不是777这样的权限，因为PHP一般使用www或者nginx用户运行，PHP通过脚本执行系统命令也是用这个用户。一般可以用下面的命令解决，具体还是要看你的环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R www:www /data/www/</span><br><span class="line">sudo chmod -R g+w /data/www/</span><br></pre></td></tr></table></figure>
+
+<p>对于ssh认证错误，你需要保证www或则nginx用户组的文件夹下有.ssh目录（一般是/home/www或/home/nginx）和一些授权文件，以及git配置文件，如下：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+ .ssh</span><br><span class="line">  - authorized_keys</span><br><span class="line">  - config</span><br><span class="line">  - id_rsa</span><br><span class="line">  - id_rsa.pub</span><br><span class="line">  - known_hosts</span><br><span class="line">- .gitconfig</span><br></pre></td></tr></table></figure></p>
+<p>而且你需要在Github、Gitlab、Gitee中加入你的公钥。具体你可以百度谷歌一下。<br>输入下面的命令就可以了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料-amp-转载来源"><a href="#参考资料-amp-转载来源" class="headerlink" title="参考资料&amp;转载来源"></a>参考资料&amp;转载来源</h2><p>部分内容是转载自：<br><span class="exturl" data-url="aHR0cHM6Ly93d3cuYXdhaW1haS5jb20vMjIwMy5odG1s" title="https://www.awaimai.com/2203.html">Github、GitLab、Gitee使用Webhooks实现代码自动部署<i class="fa fa-external-link"></i></span><br>其他优秀参考资料：<br><span class="exturl" data-url="aHR0cDovL3d3dy5wYW5neGlla2UuY29tL2xpbnV4LzEyNTIuaHRtbA==" title="http://www.pangxieke.com/linux/1252.html">gitlab利用webhook自动部署代码<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5oanFqay5jb20vMjAxNy9UaGUtc2l0ZS1jb2RlLWF1dG8tdXBkYXRlLXdpdGgtR2l0TGFiLXdlYmhvb2tzLmh0bWw=" title="http://www.hjqjk.com/2017/The-site-code-auto-update-with-GitLab-webhooks.html">利用GitLab的Webhooks功能，实现网站代码自动更新部署<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9leGNhbGlidXJoYW4uY29tL3Bvc3QvYWRkLXdlYmhvb2tzLXRvLXlvdXItcHJvamVjdC5odG1s" title="https://excaliburhan.com/post/add-webhooks-to-your-project.html">给你的项目增加Webhooks，自动进行部署（包含Github/Gitlab）<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9zdWtpa2FrYS5jYy8yMDE3LzA1LzI3LyVFNCVCRCVCRiVFNyU5NCVBOEdpdGxhYi1XZWJob29rcyVFOCU4NyVBQSVFNSU4QSVBOCVFOSU4MyVBOCVFNyVCRCVCMiVFNCVCQiVBMyVFNyVBMCU4MS8=" title="https://sukikaka.cc/2017/05/27/%E4%BD%BF%E7%94%A8Gitlab-Webhooks%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81/">使用Gitlab Webhooks自动部署代码<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cubG92ZWx1Y3kuaW5mby9hdXRvLWRlcGxveS13ZWJzaXRlLWJ5LXdlYmhvb2tzLW9mLWdpdGh1Yi1hbmQtZ2l0bGFiLmh0bWw=" title="https://www.lovelucy.info/auto-deploy-website-by-webhooks-of-github-and-gitlab.html">使用 GitHub / GitLab 的 Webhooks 进行网站自动化部署<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAxMjY0Mzk5Mg==" title="https://segmentfault.com/a/1190000012643992">git webhooks 实现自动拉取代码<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9tLmFvaC5jYy8xNDkuaHRtbA==" title="https://m.aoh.cc/149.html">利用WebHook实现PHP自动部署Git代码<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RpYW5kaWFueGl5dV9nZWVrL2FydGljbGUvZGV0YWlscy81MTM5NTg5NQ==" title="https://blog.csdn.net/diandianxiyu_geek/article/details/51395895">使用Git的Webhooks进行服务器自动部署代码<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9hb3R1LmlvL25vdGVzLzIwMTYvMDEvMDcvYXV0by1kZXBsb3ktd2Vic2l0ZS1ieS13ZWJob29rcy1vZi1naXRodWIvaW5kZXguaHRtbA==" title="https://aotu.io/notes/2016/01/07/auto-deploy-website-by-webhooks-of-github/index.html">使用Github的webhooks进行网站自动化部署<i class="fa fa-external-link"></i></span></p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="https://files.itnote.me/images/wechat.png" alt="Mt.r 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="https://files.itnote.me/images/alipay.png" alt="Mt.r 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Mt.r</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://trycoding.fun/Git/git-webhooks/" title="使用Git的webhooks进行自动化部署">https://trycoding.fun/Git/git-webhooks/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Github/" rel="tag"># Github</a>
+            
+              <a href="/tags/Gitlab/" rel="tag"># Gitlab</a>
+            
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+            
+              <a href="/tags/Git/" rel="tag"># Git</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/Linux/google-drive-backup/" rel="next" title="Centos7 使用 Goole Drive 进行数据备份、同步">
+                  <i class="fa fa-chevron-left"></i> Centos7 使用 Goole Drive 进行数据备份、同步
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/Linux/How-to-use-incron/" rel="prev" title="如何使用Incron监控重要的文件和文件夹">
+                  如何使用Incron监控重要的文件和文件夹 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="gitalk-container"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mt.r</p>
+  <div class="site-description motion-element" itemprop="description">记录和分享我在计算机、单片机、物联网开发等方面的学习笔记和心得。</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL210cnVjYw==" title="GitHub &rarr; https://github.com/mtrucc"><i class="fa fa-fw fa-github"></i></span>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <span class="exturl" data-url="bWFpbHRvOm10cnVjY0BnbWFpbC5jb20=" title="E-Mail &rarr; mailto:mtrucc@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Webhooks"><span class="nav-number">1.</span> <span class="nav-text">什么是Webhooks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Webhooks-脚本"><span class="nav-number">2.</span> <span class="nav-text">Webhooks 脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Webhooks-配置"><span class="nav-number">3.</span> <span class="nav-text">Webhooks 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">4.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-amp-转载来源"><span class="nav-number">5.</span> <span class="nav-text">参考资料&amp;转载来源</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5iZWlhbi5taWl0Lmdvdi5jbg==">京ICP备19000129号-1 </span>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mt.r</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">60k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">55 分钟</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <span class="exturl theme-link" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZw==">NexT.Pisces</span> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
+      <div class="reading-progress-bar"></div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/pjax/pjax.min.js?v=0.2.8"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script><script src="/js/bookmark.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: 'b5fd926dd425f1fc5098',
+      clientSecret: '7866f7e585d3f6b416ea7ca74e65f153b7ba2a99',
+      repo: 'mtrucc.github.io',
+      owner: 'mtrucc',
+      admin: ['mtrucc'],
+      id: '75de99d2c682b4f89fa7d71eff859759',
+        language: window.navigator.language || window.navigator.userLanguage,
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+    <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.sidebar-inner',
+    '#pjax'
+  ],
+  switches: {
+    '.sidebar-inner': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+window.addEventListener('pjax:send', () => {
+  $('.sidebar-inner').stop().fadeTo('fast', 0);
+});
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    $(element).parent().append($(element).remove());
+  });
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  $('.sidebar-inner .motion-element').css('opacity', 1);
+  $('.sidebar-inner').fadeTo('fast', 1);
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+</body>
+</html>

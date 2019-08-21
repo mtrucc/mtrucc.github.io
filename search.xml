@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Hello World 测试一下]]></title>
+    <url>%2Funcategorized%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post 测试" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[摩拜单车 - 不用二维码也可以使用？！]]></title>
+    <url>%2FMyNotes%2FMobai-bicycle%2F</url>
+    <content type="text"><![CDATA[解锁没有二维码的摩拜单车有一次我出了地铁站，看到万点绿中一点红。就是一辆摩拜单车停在了一堆其他品牌的单车（车身为绿色）中。 我挺惊讶的，这辆单车为什么没有被人骑走呢？ 上去看了一下，二维码被刮去了。 我不得不吐槽一下，有人素质真是****，为了将共享单车私用，自己提前拍下二维码或者记下车牌号之后把二维码刮去也有，用自己的锁子把车锁住的也有。 突然想起摩拜单车App最近更新了，添加了一个探测技术（类似于Airsync，当然也有可能是我猜错了想多了。），只要手机靠近车锁，就能不用扫码也能解锁，我试了一下，成功解锁~ 为什么能解锁？我以前弄过一阵腾讯微信平台的 AirKiss，知道除了Airkiss之外还有个AirSync 那么，AirSync能做什么？我引用一下AirSync的一些优势。 蓝牙设备可以直接与微信客户端进行通讯，收发数据。蓝牙设备可以在无APP的情况下通过轻应用的方式与远程服务器进行交互。 如果你还是难以理解，那我说一下我的一些猜测。 摩拜单车上有个蓝牙模块，你要解锁单车必须把手机上的蓝牙开关打开。 你的手机越靠近单车车锁，手机与车锁上的蓝牙模块之间的信号越好（越强）。 当手机靠近车锁到一定距离时，蓝牙模块与手机之间信号强度大于一定的数值，符合条件，进行自动配对。 配对成功，蓝牙模块将车牌号传输到手机上，手机再将车牌号传到服务器上。 返回一个解锁信号（可能是加密的），解锁单车，开始计费。 实现上面的步骤，可能用到了类似于AirSync的技术。 上面的都是我对为什么能解锁的一些猜测，再次强调一下！ 解锁之后干嘛？骑走不解释。当然，会有越来越多的人发现摩拜单车APP这个功能的。目前我暂时还没发现小黄车有这个功能。摩拜单车车的质量不错，做得挺用心的，点个赞~]]></content>
+      <categories>
+        <category>MyNotes</category>
+      </categories>
+      <tags>
+        <tag>我的日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用JS识别判断浏览器及操作系统类型]]></title>
+    <url>%2FJavaScript%2FJS-recognition-to-determine-browser-and-operating-system-type%2F</url>
+    <content type="text"><![CDATA[前言这几天我在弄公司的网站，弄的过程中，碰到了一个有趣的问题。公司的软件能够运行在Windows、Mac OS X以及Linux上，所以需要下载对应系统的软件包。比如Windows10 64位的电脑需要下载win64.exe，苹果电脑需要下载dmg后缀的文件。但是按钮只有一个，怎么让用户点一下就能自动下载对应的软件呢？这需要网站能够识别和判断用户的操作系统，然后给出对应系统的下载链接。 使用JS识别判断浏览器及操作系统类型其中主要要用到的是navigator.userAgent我们可以在W3C或者MDN看一下它的资料：MDN - NavigatorID.userAgent 返回当前浏览器的用户代理（user agent）字符串。W3C - NavigatorID.userAgent 比如当我们在浏览器中用下面的JS语句的时候，会返回一些信息，如下： 12alert(window.navigator.userAgent)// 弹出 "Mozilla/5.0 (Windows; U; Win98; zh-CN; rv:0.9.2) Gecko/20010725 Netscape6/6.1" 就这样，我们就能获取我们想要的信息（浏览器及操作系统类型）了。 完整代码JavaScript部分源码 12345678910111213141516171819202122232425262728293031323334353637383940var system = &#123; win32: false, win64: false, mac: false, xll: false &#125;; //检测平台 var p = navigator.userAgent; // 进行简单的判断 system.win32 = p.indexOf("Win32") &gt; -1; system.win64 = p.indexOf("Win64") &gt; -1 || p.indexOf("WOW64") &gt; -1; system.mac = p.indexOf("Mac") &gt; -1; system.x11 = (p == "X11") || (p.indexOf("Linux") &gt; -1); // 绑定按钮 var downloadlink = document.getElementById("download_link"); // 先进行判断，如果判断不出，就直接给出下载页 if (system.win32 || system.mac || system.xll || system.win64) &#123; if (system.win32) &#123; downloadlink.href = "https://blog.itnote.me/Web/Web-technical-document-query/" &#125; if (system.win64) &#123; downloadlink.href = "https://blog.itnote.me/Web/search-thank-you/" &#125; if (system.mac) &#123; downloadlink.href = "https://blog.itnote.me/Node-js/centos7-install-nodejs/" &#125; if (system.xll) &#123; downloadlink.href = "https://blog.itnote.me/Nginx/nginx-proxy-install/" &#125; &#125; else &#123; downloadlink.href = "./download.html" &#125; Html部分源码 123&lt;div id=&quot;&quot; class=&quot;&quot;&gt; &lt;a href=&quot;https://blog.itnote.me&quot; id=&quot;download_link&quot; class=&quot;download_link&quot;&gt;立即下载&lt;/a&gt;&lt;/div&gt; 后记用起来很方便，但是需要一些基础。]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[对比百度和谷歌进行“谢谢”的图片搜索]]></title>
+    <url>%2FWeb%2Fsearch-thank-you%2F</url>
+    <content type="text"><![CDATA[为什么会写这篇文章偶然的发现，我写的上一篇文章需要一个和“谢谢有关的图片，但是我没有在百度图片搜索结果找到让我满意的图片。于是我用谷歌进行了一下搜索，发现了一些很有意思的现象。 百度搜索“谢谢”如图所示，第一眼看上去，只能看到2张图片有“谢谢”两个字。 谷歌搜索“谢谢”不用我多说了把，很快就能找到让自己满意的图片 后记百度还是需要优化一下，毕竟“谢谢”是中文，不要一堆古老的thanks。]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[谢谢！]]></title>
+    <url>%2FMyNotes%2Fthanks%2F</url>
+    <content type="text"><![CDATA[今天我回房的时候，急急忙忙的要上地铁，可这辆地铁的安全门快要关闭了，有一位站着的乘客用手挡在门边让门得以延时关闭，我上来匆匆找了一个位置坐下没来得及道谢。在座位上我和这位乘客对视了一会儿（想说谢谢，但距离不合适），我就看手机了，快下地铁的时候我走过来对这位乘客点头说了一声：“谢谢！”，她也对我笑了一下。这个经历在生活中也许非常平淡，但是我还是要说这一声谢谢，这是礼貌，同时也期望她感觉开心一些。]]></content>
+      <categories>
+        <category>MyNotes</category>
+      </categories>
+      <tags>
+        <tag>我的日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[前端文档查询 - MDN Web 文档 - Mozilla]]></title>
+    <url>%2FWeb%2FWeb-technical-document-query%2F</url>
+    <content type="text"><![CDATA[##先记一下MDN Web 文档 - Mozilla - https://developer.mozilla.org前端开发的可以在这儿查资料。]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[发现了一个比较好的JavaScript学习网站]]></title>
+    <url>%2FJavaScript%2FFound-a%20nice-JavaScript-learning-site%2F</url>
+    <content type="text"><![CDATA[##先记一下Codecademy - https://www.codecademy.com这个网站的教程很不错，并且你可以在上面练习，他会给你一个题目，实在做不出来了可以找答案。]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[不用WINPE安装纯净的Windows 10]]></title>
+    <url>%2FWindows%2FInstal-the-original-Windows10%2F</url>
+    <content type="text"><![CDATA[就在昨天，我从老板那儿Get了个技能，非常有用。喜欢折腾的技术宅，多多少少会自己重装“干净”的系统，但是网上下载的大白菜啊，老毛桃啊，总是在你装完系统后加装一些奇奇怪怪的软件，非常讨厌。然后网上的一键装机也都阉割了很多组件，导致不少软件都不能够正常的使用，非常烦人。 准备工作一个可以正常使用的Windows操作系统和一个8G以上大小的U盘，这个就不必多说了把。 下载官方原版镜像在这儿可以下到官方原版镜像：MSND，我告诉你 装载原版ISO映象右键点击下载好的ISO映象文件 - 装载如果当前 Windows 10 已安装的第三方软件已关联了.iso文件，则无法通过双击直接挂载，右击之后也不会出现「装载」选项。此时可以在右击弹出的快捷菜单中通打开方式—Windows 资源管理器来手动装载 ISO。ISO 装载好之后 Windows 10 会自动创建一个虚拟光驱并分配一个盘符，我们可以通过左侧窗格或者我的电脑直接导航并查看到其中的内容。 格式化U盘，拷贝安装文件到U盘然后我们需要先格式化U盘先按下键盘组合键win + r打开运行窗口，输入cmd打开Windows命令处理程序。 使用diskpart命令分区。 list disk列出当前可用分区 select disk xx选择磁盘，xxx代表磁盘号，选择U盘即可 clean清除磁盘 convert gpt转换为gpt格式创建EFI分区及系统安装分区：create partition efi size=100 创建EFI分区，大小100Mcreate partition msr size=128 创建MSR分区，默认是 128M 让你的电脑从U盘启动这个不好详细说，具体请百度：“电脑型号 + U盘启动” u盘启动后进入安装界面不要急着安装首先点击开始安装后按shift + f10组合键 使用diskpart命令分区。 list disk列出当前可用分区 select disk xx选择磁盘，xxx代表磁盘号，选择U盘即可 clean清除磁盘 convert gpt转换为gpt格式然后创建EFI分区及系统安装分区：create partition efi size=100创建EFI分区，大小100Mcreate partition msr size=128创建MSR分区，默认是 128M 开始安装按照提示正常安装即可]]></content>
+      <categories>
+        <category>Windows</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JS入门]]></title>
+    <url>%2FJS%2FGetting-started-with-JS%2F</url>
+    <content type="text"><![CDATA[由于不知道JS入门要学习哪些，于是我请教了一下广哥，他抽时间给了我这一份文档，让我有了学习方向。 js入门知识要点语法篇 js es6 模块化 amd cmd umd 第三方库篇 jquery lodash nodejs babel react vue 工具篇 npm yarn gulp webpack 深入篇 闭包 原型 Promise this作用域 函数式编程 宿主 electron 准备工作 安装nodejs &gt;= 8.11 安装sublime_text和vscode及相关插件 安装python &gt;= 2.7.14 安装chrome &gt;= 67 安装git &gt;= 2.15 安装yarn]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[未来的规划]]></title>
+    <url>%2FMyNotes%2FFuture-planning%2F</url>
+    <content type="text"><![CDATA[现在是北京时间2018年6月10日 00:28:22。 我也快大四毕业了，准备前往北京去工作，和老板谈的工资是5000元，不高不低刚好够我的吃穿住。 我明白一个刚毕业的大学生也没有什么特长和能力，能找到合适的工作并拿到5000元的工资已经很不错了。我也感谢假期实习时公司对我的培养，在北京的这段时间，我收获不少。 我身边的朋友和网上的朋友告诉我我这个工资在北京属于偏下的，我也明白这一点。但我更明白工资和能力是挂钩的，在新疆上大学，就业方面也我没什么太大的优势，我来“北漂”不仅仅是为了工作和赚钱，这儿处处是机遇和挑战，在北京我应该是学习和收获。 后面的工作学习方向，我偏向嵌入式开发，软件开发，及IOS开发。之后是Python，大数据和人工智能。 嵌入式开发要学习的有数字电路，模拟电路，C/C++。 软件开发/IOS开发则需要精通C/C++/Obc，算法。 Python、大数据、人工智能是目前的主流，但是我的基础太差了，这个需要放到后面有时间（业余时间）去学习。 我才在学校答辩完，我们也没什么事情，学校也不让走，目前我在家里学习C++，期望到了公司能够更快的融入环境，为公司做点事。 下班的其他时间，周末时间除了学习，我想帮助我的朋友雷罗，他在我大学中帮助了我很多，让我见识和学习了很多知识。还给我介绍了他的朋友，我打算帮助他们，给他们提供支持。 他们弄了一个字幕软件 - Arctime，并为此付出了不少，祝他们成功！ 我的朋友雷罗工作很忙，以至于很多的想法没能很好的完成，我也应该帮他。 我自己也有想法，不过由于能力与经验的原因，实现起来很困难。 我打算弄个技术宅社区，往里面丢好玩的有意思的干货。有的项目自己难以完成，那就留一个题目让别人来完成吧！独乐乐不如众乐乐~ 域名还是bbs.itnote.me，不过服务器被我重装了，可能要重新搞一次了。 所以在后面的这段时间我主要做下面3件事： 工作学习 帮助我的朋友 实现自己的想法]]></content>
+      <categories>
+        <category>MyNotes</category>
+      </categories>
+      <tags>
+        <tag>我的日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用phpMyAdmin批量替换Mysql数据库中的内容]]></title>
+    <url>%2FMysql%2Fbatch-replacement-database%2F</url>
+    <content type="text"><![CDATA[批量替换命令1UPDATE `数据表名` SET `字段名` = replace (`字段名`,'要替换的内容','替换后的内容') 举例1UPDATE `wp_postmeta` SET `meta_value` = replace (`meta_value`,'http://blog.itnote.me','https://blog.itnote.me')]]></content>
+      <categories>
+        <category>Mysql</category>
+      </categories>
+      <tags>
+        <tag>phpmyadmin</tag>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[crontab 或者 incron 执行 shell 脚本]]></title>
+    <url>%2FLinux%2Fcrontab-incron-run-shell%2F</url>
+    <content type="text"><![CDATA[前一阵子碰到了个玄学问题，就是crontab不执行shell脚本。在命令行下可以正常执行，然而crontab下不行，incron更不行。折腾了一天，总算找到了解决方法 解决方法脚本务必放在root文件夹下个人的经验把，放在root文件夹下，也就是用户目录下，crontab或则incron才能方便执行 设置脚本的环境变量,在脚本前插入PATH这个比较重要，在命令行下执行： 1echo $PATH 将返回的环境变量复制出来，插入到前面，如下 1PATH=/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/home/x/bin 给脚本执行权限1chmod a+x shell.sh 其他查找执行文件的真正路径有时候 1hexo g 是不能直接执行的可以试试 1which hexo 查找一下hexo运行文件的真正路径。 脚本调试如果你不清楚脚本哪儿错误了这样记录错误信息到log文件中crontab可以这样： 1*/1 * * * *cd /root/ &amp;&amp; ./runhexo.sh &gt;&gt; /root/runhexoerror.log 2&gt;&amp;1 其中/root/runhexoerror.log便是日志文件了，你可以查看返回的错误信息，根据错误信息调试你的脚本。 什么是#!/bin/sh1#!/bin/sh 是指定脚本解释器比如我用 1#!/usr/bin/php 就是用php模块执行php文件 总结上面几点看上去简单，实际上，他们花去我很多的时间。我查了很多的资料才注意到这些。所以说，基础一定要扎实，我也不是专业写脚本的，所以碰到这些问题。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[基于Oneinstack配置Nginx的Google Fonts反向代理]]></title>
+    <url>%2FNginx%2Fnginx-proxy-install%2F</url>
+    <content type="text"><![CDATA[我最近折腾Nginx反向代理呢，是基于Oneinstack安装包DIY的。但是遇见了一些问题。好在总算成功了步骤如下： 必看需要有好的linux基础，未用Oneinstack安装过nginx，如果安装过，那你就需要解压nginx文件夹，复制Oneinstack的编译文件，挺麻烦的。至于为什么安装过，就不能重新安装，请看后面。 安装基本组件12yum -y install wget screen curl python #for CentOS/Redhat# apt-get -y install wget screen curl python #for Debian/Ubuntu 下载和解压Oneinstack安装包12wget http://mirrors.linuxeye.com/oneinstack-full.tar.gz #包含源码，国内外均可下载tar xzf oneinstack-full.tar.gz 修改nginx.sh安装文件进入Oneinstack目录下的include文件夹，修改nginx.sh，个人建议用编辑器而不是vi nano之类的命令。正常情况下文件路径为/root/oneinstack/include/nginx.sh可以看到类似下面的代码： 1./configure --prefix=$&#123;nginx_install_dir&#125; --user=$&#123;run_user&#125; --group=$&#123;run_user&#125; --with-http_stub_status_module --with-http_v2_module --with-http_ssl_module --with-http_gzip_static_module --with-http_realip_module --with-http_flv_module --with-http_mp4_module --with-openssl=../openssl-$&#123;openssl_ver&#125; --with-pcre=../pcre-$&#123;pcre_ver&#125; --with-pcre-jit --with-ld-opt='-ljemalloc' $&#123;nginx_modules_options&#125; 需要添加 --with-http_sub_module，改为 1./configure --prefix=$&#123;nginx_install_dir&#125; --user=$&#123;run_user&#125; --group=$&#123;run_user&#125; --with-http_sub_module --with-http_stub_status_module --with-http_v2_module --with-http_ssl_module --with-http_gzip_static_module --with-http_realip_module --with-http_flv_module --with-http_mp4_module --with-openssl=../openssl-$&#123;openssl_ver&#125; --with-pcre=../pcre-$&#123;pcre_ver&#125; --with-pcre-jit --with-ld-opt='-ljemalloc' $&#123;nginx_modules_options&#125; 保存上传。 安装执行 12cd ~/oneinstack./install.sh 安装，全部默认，全部y。或则只选择安装Nginx即可。 配置Nginx文件自行添加网站，配置证书 12cd ~/oneinstack./vhost.sh 新建反代缓存文件夹 123mkdir /var/cache/nginx/temp -p mkdir /var/cache/nginx/cache chmod 755 -R /var/cache/nginx/cache 修改conf文件，一般位于/usr/local/nginx/conf/vhost文件夹内conf文件可以参考我的另一篇文章，我在这儿就不贴了。Nginx 反向代理 Google Font、Ajax 和 Gravatar 头像Gitlab：nginx-proxy直接下载：nginx-proxy-conf 重载Nginx配置文件1service nginx reload 遇见的问题我曾经整理了问题，问了群里的，但是没问出隔所以然来。这是我整理的问题，以后有时间就看看吧。 123456失败部分1.解压oneinstack ./install.sh 安装 全部默认 全部y2.cd oneinstack ./uninstall.sh 只卸载nginx3.cd oneinstack/include 修改nginx.sh 添加 --with-http_sub_module ./configure --prefix=$&#123;nginx_install_dir&#125; --user=$&#123;run_user&#125; --group=$&#123;run_user&#125; --with-http_sub_module --with-http_stub_status_module --with-http_v2_module --with-http_ssl_module --with-http_gzip_static_module --with-http_realip_module --with-http_flv_module --with-http_mp4_module --with-openssl=../openssl-$&#123;openssl_ver&#125; --with-pcre=../pcre-$&#123;pcre_ver&#125; --with-pcre-jit --with-ld-opt='-ljemalloc' $&#123;nginx_modules_options&#125;4.cd oneinstack ./install.sh 只安装nginx 就出现这样的错误了 安装过程中的错误截图： 12345成功部分1.解压oneinstack2.cd oneinstack/include 修改nginx.sh 添加 --with-http_sub_module ./configure --prefix=$&#123;nginx_install_dir&#125; --user=$&#123;run_user&#125; --group=$&#123;run_user&#125; --with-http_sub_module --with-http_stub_status_module --with-http_v2_module --with-http_ssl_module --with-http_gzip_static_module --with-http_realip_module --with-http_flv_module --with-http_mp4_module --with-openssl=../openssl-$&#123;openssl_ver&#125; --with-pcre=../pcre-$&#123;pcre_ver&#125; --with-pcre-jit --with-ld-opt=&apos;-ljemalloc&apos; $&#123;nginx_modules_options&#125;3../install.sh 安装 全部默认 全部y 参考资料&amp;转载来源 Oneinstack]]></content>
+      <categories>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>反向代理</tag>
+        <tag>Oneinstack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[nginx下为访问页面增加身份认证]]></title>
+    <url>%2FNginx%2Fnginx-auth-basic%2F</url>
+    <content type="text"><![CDATA[我有一些网站，只想给自己和自己的朋友看，所以需要加密，加上访问认证。只有知道用户名和密码的人才能访问自己的网站。 准备工作能看到这篇文章的，大都安装过Nginx了吧。如果没有安装过，那你就需要安装Nginx了。 生成加密过的密码使用openssl生成加密过的密码： 1openssl passwd 接下来会提示输入密码，连续输入两次后就能得到加密后的密码了，如： 1D89diuh3du23d 此时把加密的密码复制下来，供后面使用。 创建认证文件后面在nginx设置中对眼身份认证，需要指定一个存有用户名和密码的文件，所以这里首先创建。为防止出现权限问题，将文件创建到nginx配置目录下，文件名为passwd 1nano /usr/local/nginx/conf/passwd 在文件中写入 1admin:D89diuh3du23d 其中admin即设置的验证用户名，可随意更改，不需要再次加密。 修改nginx配置文件打开nginx配置文件 1nano /usr/local/nginx/conf/vhost/blog.itnote.me.conf 增加一个location，如： 12345678910server &#123; . . . location / &#123; auth_basic "Admin Login"; auth_basic_user_file /etc/nginx/pma_pass; &#125; . . .&#125; 在此location下填入认证提示，并指明认证文件路径auth_basic中字符串内容用在认证界面的提示中，如果不希望别人知道这个网页的用途的话，就写一个无关紧要的Admin Login。 重启nginx生效重启nginx 1service nginx restart 参考文章本文大部分内容转载自：nginx下为访问页面增加身份认证]]></content>
+      <categories>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[在Centos7下安装ImageMagick]]></title>
+    <url>%2FLinux%2Fcenyos7-install-ImageMagick%2F</url>
+    <content type="text"><![CDATA[我使用了h5ai，需要用到ImageMagick，所以需要在系统中安装ImageMagick模块 安装ImageMagickCentos系统运行下面的命令安装ImageMagick： 1yum install ImageMagick ImageMagick-devel pcre-devel 然后测试一下是否能够正常运行 1convert 如果正常的输出了帮助信息，那就安装成功了。 参考文章ImageMagick官网]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[在Centos7下安装ffmpeg]]></title>
+    <url>%2FLinux%2Fcenyos7-install-ffmpeg%2F</url>
+    <content type="text"><![CDATA[前一阵子我用yum安装了ffmpeg，但无法正常运行。耐心查看了一下错误输出信息，原来是因为缺少libfribidi.so.0组件导致的。 安装ffmpegCentos系统运行下面的命令安装ffmpeg： 12345sudo yum install epel-release -ysudo yum update -ysudo rpm --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.rosudo rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpmsudo yum install ffmpeg ffmpeg-devel -y 然后测试一下是否能够正常运行 1ffmpeg -h 如果正常的输出了帮助信息，那就安装成功了，如果提示缺少libfribidi.so.0组件。那就需要安装一下。 安装libfribidi.so.0依赖直接执行下面的命令就可以了 1yum install fribidi 参考文章fribidi-0.19.4-6.el7.i686.rpm]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[如何使用Incron监控重要的文件和文件夹]]></title>
+    <url>%2FLinux%2FHow-to-use-incron%2F</url>
+    <content type="text"><![CDATA[前面我已经写了Git的Webhooks使用文章，但如果我们使用Dropbox或者谷歌云盘进行文件同步，文件发生变动时怎么自动执行脚本呢？可以选择使用Incron进行文件监控。 什么是Incron先放几个官方的说明： Github http://inotify.aiken.cz This program is an “inotify cron” system. It consists of a daemon and a table manipulator. You can use it a similar way as the regular cron. The difference is that the inotify cron handles filesystem events rather than time periods.这个程序是一个“inotify cron”系统。它由一个守护进程和一个表操作器组成。你可以像使用普通的cron一样使用它。区别在于inotify cron处理文件系统事件而不是时间段。 简单概括一下（译自http://inotify.aiken.cz）：incron提供了一个简单的方法来解决许多和许多不同的情况。每当某些事情取决于文件系统事件时，它就是incron的工作。在这里你可以看到几个例子，incron是一个很好的解决方案： 通知程序（例如服务器守护程序）有关配置的更改 保护关键文件的变化（最终恢复） 文件使用情况监控，统计 自动碰撞清理 自动更新备份或版本控制 新邮件通知（maildir） 服务器上传通知 安装管理（外包装系统） Incron 安装 Centos7 下执行以下命令 123yum install incronservice incrond startchkconfig incrond on 如果提示缺少包，你可以去下载：pkgs.org Ubuntu 则执行以下命令 1sudo apt-get install incron incrond 配置使用vi编辑器 1echo 'editor = vi' &gt;&gt; /etc/incron.conf #修改incrond默认编辑器为vi incrond 使用启动 1service incrond start 停止 1service incrond stop 状态（调试） 1service incrond status 查看帮助信息 1incrontab -h 添加触发任务 1incrontab -e 重载 1incrontab -d incrond 任务使用下面的命令添加触发任务 1incrontab -e incron守护进程（incrond）必须在根目录下运行（通常来自运行级脚本等）。命令格式：&lt;path&gt; &lt;mask&gt; &lt;command&gt; 具体功能： &lt;path&gt; 是一个文件系统路径（避免空格） &lt;mask&gt; 是一个符号（请参阅inotify.h;使用逗号分隔符号）或事件的数字掩码 &lt;command&gt; 是在事件上运行的应用程序或脚本 &lt;path&gt; - 这是您要观看的目录的路径。请注意，Incron无法观看子目录。只有路径中的文件将被监控。如果你需要监视子目录，你必须给他们自己的条目。 &lt;mask&gt; - 可以用下面的几个选项： 事件 含义 IN_ACCESS 文件被访问（读取） IN_ATTRIB 元数据已更改（权限，时间戳，扩展属性等） IN_CLOSE_WRITE 为写入而打开的文件已关闭 IN_CLOSE_NOWRITE 未打开文件已关闭 IN_CREATE 在监视的目录中创建的文件/目录 IN_DELETE 从监视目录中删除的文件/目录 IN_DELETE_SELF 监视的文件/目录本身已被删除 IN_MODIFY 文件已被修改 IN_MOVE_SELF 监视的文件/目录本身已移动 IN_MOVED_FROM 文件移出监视目录 IN_MOVED_TO 文件已移入监视目录 IN_OPEN 文件已打开 &lt;command&gt; - 这是在事件被触发时将运行的命令。代替命令，您始终可以使用通配符。通配符将在syslog中报告基本信息。可用的通配符是： 命令 含义 $$ 打印美元符号 $@ 添加观看的文件系统路径 $# 添加事件相关的文件名 $% 添加事件标志（文本） $&amp; 添加事件标志（数字） incrond 举例我放一下自己的incrond任务 1/root/Dropbox/hexo/source/_posts/ IN_MOVE,IN_MODIFY,IN_CREATE,IN_DELETE /root/runhexo.sh 当 /root/Dropbox/hexo/source/_posts/ 文件夹发生变动的时候运行/root/runhexo.sh incrond 注意事项我使用的时候，碰到了几个问题 使用 incrontab -e 编辑并保存后，任务未生效。最后发现应该还要输入下面的命令重载一下 1incrontab -d 使用下面的命令查看任务是否执行 1service incrond status 没有service incrond reload这个命令，你可以自己自定义。最后，不要忘记给脚本提权： 12chmod -x runhexo.shchmod -R 777 /root/runhexo.sh 参考资料&amp;转载来源 Github http://inotify.aiken.cz]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Git的webhooks进行自动化部署]]></title>
+    <url>%2FGit%2Fgit-webhooks%2F</url>
+    <content type="text"><![CDATA[前一阵子我其实是想用Google drive + incron的方式自动提交博客，然而碰到了一些问题，Goole drive可以同步文件夹，但不能自动同步文件夹，并且没有git这样优秀的版本控制。而我又不想自己手动上传文章以及拉取文章，拉取之后还得手工hexo g，太麻烦了。写定时拉取，自动更新的确可以，但是这样太没逼格了。于是我就查资料，发现了git有webhooks。 什么是Webhooks先放几个官方的说明： Github Webhooks Gitlab Webhooks 简单概括一下（译自Github Webhooks）： Webhooks允许我们建立关于项目的在GitHub上的事件集成.当事件触发的时候,会通过HTTP POST的方式,向我们的服务器发送请求.我们可以用这个服务器去更新外部跟踪,触发CI build,更新备份镜像,部署到生产服务器. 每个Webhook都可以安装在一个项目或者组织上,安装完毕之后,就可以随着订阅的时间进行触发. 每个项目的每个事件最多可以安装20个Webhook. Webhooks 脚本Webhook脚本实现可以用PHP、NodeJS等，本文仅介绍PHP脚本，笔者也用的这个脚本 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465&lt;?php// 本地仓库路径$local = '/var/www/html/';// 安全验证字符串，为空则不验证$token = '123456';// 如果启用验证，并且验证失败，返回错误$httpToken = isset($_SERVER['HTTP_X_GITLAB_TOKEN']) ? $_SERVER['HTTP_X_GITLAB_TOKEN'] : '';if ($token &amp;&amp; $httpToken != $token) &#123; header('HTTP/1.1 403 Permission Denied'); die('Permission denied.');&#125;// 如果仓库目录不存在，返回错误if (!is_dir($local)) &#123; header('HTTP/1.1 500 Internal Server Error'); die('Local directory is missing');&#125;//如果请求体内容为空，返回错误$payload = file_get_contents('php://input');if (!$payload) &#123; header('HTTP/1.1 400 Bad Request'); die('HTTP HEADER or POST is missing.');&#125;/* * 这里有几点需要注意： * * 1.确保PHP正常执行系统命令。写一个PHP文件，内容： * `&lt;?php shell_exec('ls -la')` * 在通过浏览器访问这个文件，能够输出目录结构说明PHP可以运行系统命令。 * * 2、PHP一般使用www-data或者nginx用户运行，PHP通过脚本执行系统命令也是用这个用户， * 所以必须确保在该用户家目录（一般是/home/www-data或/home/nginx）下有.ssh目录和 * 一些授权文件，以及git配置文件，如下： * ``` * + .ssh * - authorized_keys * - config * - id_rsa * - id_rsa.pub * - known_hosts * - .gitconfig * ``` * * 3.在执行的命令后面加上2&gt;&amp;1可以输出详细信息，确定错误位置 * * 4.git目录权限问题。比如： * `fatal: Unable to create '/data/www/html/awaimai/.git/index.lock': Permission denied` * 那就是PHP用户没有写权限，需要给目录授予权限: * `` * sudo chown -R :www-data /data/www/html/awaimai` * sudo chmod -R g+w /data/www/html/awaimai * ``` * * 5.SSH认证问题。如果是通过SSH认证，有可能提示错误： * `Could not create directory '/.ssh'.` * 或者 * `Host key verification failed.` * */echo shell_exec("cd &#123;$local&#125; &amp;&amp; git pull 2&gt;&amp;1");die("done " . date('Y-m-d H:i:s', time())); Webhooks 配置像图片中这样设置就可以了 注意事项如果不能正常的拉取，你可以先使用下面的php程序进行测试。 1234&lt;?php$output = shell_exec('ls -lart');echo "&lt;pre&gt;$output&lt;/pre&gt;";?&gt; 如果网页不能够输出你当前的文件夹下的文件，说明shell_exe()函数被禁用了，你需要修改php.ini，启用该函数 然后用下面的php程序接着测试 1234567&lt;?php// 本地仓库路径$local = '/var/www/html/';echo shell_exec("cd &#123;$local&#125; &amp;&amp; git pull 2&gt;&amp;1");die("done " . date('Y-m-d H:i:s', time()));?&gt; 看看输出的信息。在执行的命令后面加上2&gt;&amp;1可以输出详细信息，确定错误位置。 一般情况下有3种错误： 权限不足 ssh认证错误 不能读写文件 对于权限不足，你需要给网站www或则nginx用户组权限，不是777这样的权限，因为PHP一般使用www或者nginx用户运行，PHP通过脚本执行系统命令也是用这个用户。一般可以用下面的命令解决，具体还是要看你的环境： 12sudo chown -R www:www /data/www/sudo chmod -R g+w /data/www/ 对于ssh认证错误，你需要保证www或则nginx用户组的文件夹下有.ssh目录（一般是/home/www或/home/nginx）和一些授权文件，以及git配置文件，如下： 1234567+ .ssh - authorized_keys - config - id_rsa - id_rsa.pub - known_hosts- .gitconfig 而且你需要在Github、Gitlab、Gitee中加入你的公钥。具体你可以百度谷歌一下。输入下面的命令就可以了 1ssh-keygen -t rsa 参考资料&amp;转载来源部分内容是转载自：Github、GitLab、Gitee使用Webhooks实现代码自动部署其他优秀参考资料：gitlab利用webhook自动部署代码利用GitLab的Webhooks功能，实现网站代码自动更新部署给你的项目增加Webhooks，自动进行部署（包含Github/Gitlab）使用Gitlab Webhooks自动部署代码使用 GitHub / GitLab 的 Webhooks 进行网站自动化部署git webhooks 实现自动拉取代码利用WebHook实现PHP自动部署Git代码使用Git的Webhooks进行服务器自动部署代码使用Github的webhooks进行网站自动化部署]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Github</tag>
+        <tag>Gitlab</tag>
+        <tag>PHP</tag>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Centos7 使用 Goole Drive 进行数据备份、同步]]></title>
+    <url>%2FLinux%2Fgoogle-drive-backup%2F</url>
+    <content type="text"><![CDATA[我有3个谷歌帐号，其中2个拥有无限空间的Goole drive。最近我需要备份网站数据，需要一天备份一次，国内的网盘我不放心，所以想到了谷歌云端硬盘。在Centos7下使用谷歌云端硬盘非常的容易，一个老外已经写好了Google Drive的CLI工具-Gdrive如果无法访问，可以上我自己的私有仓库-Gdrive 安装Gdrive进入ssh，运行下面的命令即可 12wget -O /usr/bin/gdrive "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&amp;export=download"chmod +x /usr/bin/gdrive 授权运行下面的命令给Gdrive进行授权，输入命令后会出现一串网址并询问验证码，将地址粘贴到浏览器并登陆账号，会返回一串代码，粘贴，回车后会返回你的账户信息。 1gdrive about 使用Gdrive常用命令如下，更多查看gdrive官网：Gdrive 列出Google Drive根目录下文件、文件夹 1gdrive list 下载Google Drive根目录下文件到本地（xxxx为文件名） 1gdrive download xxxx 把本地文件上传到Google Drive根目录下（xxxx为文件名） 1gdrive upload xxxx 在Google Drive根目录下创建文件夹（xxx为文件夹名） 1gdrive mkdir xxx 自动备份，上传网站文件到Google Drive脚本下载：googledrive.sh，或则往下翻，我已经贴到后面了。请根据自己的情况进行修改，修改以下部分： 1234567第3行：my-database-name 改为自己的数据库名第4行：my-database-user 改为自己的数据库用户名第5行：my-database-password 改为自己的数据库用户名对应的密码第7行：zhujiwiki 改为自己的网站目录第8行：/home/wwwroot 改为自己的网站所在目录（即需备份目录为 /home/wwwroot/zhujiwiki）第9行：/backups 改为备份文件存放目录第35行：youremail@yourdomain.com 修改为自己的邮箱 将脚本上传到/root目录下,运行下面的代码 12cd /rootchmod +x googledrive.sh 创建定时任务 1crontab -e 添加 10 2 * * * /backups/googledrive.sh Google Drive的一些高级操作先列出文件和文件夹 1gdrive list 上传文件到Google Drive内的指定文件夹，其中0B3X9GlR6EmbnY1RLVTk5VUtOVkk为文件夹ID，gdrive-osx-x64为本地文件 1gdrive upload --parent 0B3X9GlR6EmbnY1RLVTk5VUtOVkk gdrive-osx-x64 下载Google Drive内的指定文件夹到本地，其中0BzTeuubJesi为文件ID 1gdrive download 0BzTeuubJesi 同步文件到Google Drive，newFolder为你的本地文件夹，0B3X9GlR6EmbnOEd6cEh6bU9XZWM为返回的ID 1234# 在Goole Drive创建文件夹drive-bingdrive mkdir drive-bin# 创建文件夹后会返回文件夹ID，同步你的本地文件夹到Goole Drive，gdrive sync upload newFolder 0B3X9GlR6EmbnOEd6cEh6bU9XZWM 从Google Drive同步文件到本地，myLocaldir为你的本地文件夹，0B3X9GlR6EmbnOEd6cEh6bU9XZWM为返回的ID 1gdrive sync download 0B3X9GlR6EmbnOEd6cEh6bU9XZWM myLocaldir 查询所有版本 1gdrive revision list YUlPWWdLcy1mX2c 下载某一版本，最后两个Id分别为文件Id和版本Id 1gdrive revision download YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ 删除某一版本 1gdrive revision delete YUlPWWdLcy1mX2c Y3JBWEJ5a0gwZndlR3hzWlZubFlUMWFnaHVnPQ 脚本源码脚本源码如下 123456789101112131415161718192021222324252627282930313233343536373839#!/bin/sh##-----------------------Database Access--------------------------##DB_NAME="my-database-name"DB_USER="my-database-user"DB_PASSWORD="my-database-password"##-----------------------Folder Web or Folder you want to backup--------------------------##NameOfFolder=("zhujiwiki")SourceOfFolder="/home/wwwroot"BackupLocation="/backups"date=$(date +"%Y-%m-%d")##That mean, you will Backup the folder /home/wwwroot/zhujiwiki and will save into Folder /backupsif [ ! -d $BackupLocation ]; thenmkdir -p $BackupLocationfifind $BackupLocation/*.zip -mtime +10 -exec rm &#123;&#125; \;for fd in $NameOfFolder; do# Name of the Backup Filefile=$fd-$date.zip# Zip the Folder you will want to Backupecho "Starting to zip the folder and files"cd $SourceOfFolderzip -r $BackupLocation/$file $fdsleep 5smysqldump -u $DB_USER -p$DB_PASSWORD $DB_NAME | gzip &gt; $BackupLocation/$date-$DB_NAME.sql.tarsleep 5s##Process Upload Files to Google Drivegdrive upload --file /backups/$filesleep 5sgdrive upload --file /backups/$date-$DB_NAME.sql.tarif test $? = 0thenecho "Your Data Successfully Uploaded to the Google Drive!"echo -e "Your Data Successfully created and uploaded to the Google Drive!" | mail -s "Your VPS Backup from $date" youremail@yourdomain.comelseecho "Error in Your Data Upload to Google Drive" &gt; $LOG_FILEfidone 后记本文部分内容转载自：Gdrive：Linux下同步Google Drive文件、自动备份网站到Google Drive命令行使用Google Drive感谢这几位大佬提供的教程。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Centos7</tag>
+        <tag>Goole Drive</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[写给2035年自己的一封信]]></title>
+    <url>%2FMyNotes%2FA-letter-written-to-myself-in-2035%2F</url>
+    <content type="text"><![CDATA[现在是北京时间2018年3月14日 19:48:21，我在北京，天气良好。 2018年3月12日，我拖着行李，坐飞机第三次来到了北京，急着去找房租，但是没想到北京房租市场的水太深了，我没有及时的租到房子。晚上请教了同事，了解了房租应该租在哪一片地区，怎么样才能避免“黑中介”等问题，我非常感谢他们在这时候提供的帮助！ 2018年3月13日，我在沙河租到了18平米的整租房，一室一卫，没有人打扰，房子很好，阳光能通过窗户照进来。然后搬行李到房间，简易的收拾了一下，很累，便睡了。 2018年3月14日，也就是今天，我处理了一下房屋的一些细节问题，准备明天开始正式实习，我给老板和同时说的3月中旬来，我说话要算数。 2035年的我，你好！ 我不知道未来的我，生活是不是变得更好了？是不是一如既往的热爱生活，热爱自己的工作？ 我想说一下我第一次来到啃萝卜公司前一个月的经历，初来面试的时候，老板给我的面试题“写一个去掉数组中的空格的函数”，我没完成，心里很忐忑。 老板让我弄Airkiss的一个项目，我一周末都在想办法去完成，那段时间的调试我有点崩溃。 后面老板再次给我了一个对我来说“大的不像话的，难于上青天”的目标和任务，因为我自己的基础知识太差了。这段时间我每天也都在坚持着，给自己一个小目标，一个个去完成它。在过年放假前几天，我才完成了一半，这让我看到了期望。 过年在家我休息了一阵，又开始继续学习和写程序。老板给的任务我也没忘记，一点一点的去想办法完成。 我非常感谢老板和同事！ 2035年的我，这是我这阵子比较深的感悟，如果你还是记忆犹新，那我的这些经历似乎帮助到了你！如果你忘记了，期望我的日记能让你想起来。 写不下去了，不写了，好好休息，明天开开心心见老板和同事，好好工作实习！ 毛天润2018年3月14日 20:13:13]]></content>
+      <categories>
+        <category>MyNotes</category>
+      </categories>
+      <tags>
+        <tag>我的日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C语言去除空格]]></title>
+    <url>%2FC%2Fc_language_remove_spaces_from_string%2F</url>
+    <content type="text"><![CDATA[今天我去应聘，面试我的大佬考了我一道题，但是我没有做出来，太丢人了。他的要求是C语言写出一个去除空格的函数。应该自我反省并做笔记。查了一下资料，多次实验，给出的程序如下。 1234567891011121314151617181920212223#include&lt;stdlib.h&gt;#include&lt;stdio.h&gt;#include&lt;string.h&gt;void trim(char *strIn, char *strOut) &#123; int i, j ; i = 0; j = strlen(strIn) - 1; while (strIn[i] == ' ') ++i; while (strIn[j] == ' ') --j; strncpy(strOut, strIn + i , j - i + 1); strOut[j - i + 1] = '\0';&#125;void main() &#123; char *strIn = " ak kl p "; char strOut[100]; trim(strIn, strOut); printf("*%s*\n", strOut); system("pause");&#125; 还可以用下面的函数去除空格 123456789101112131415161718void trim(char *strIn, char *strOut) &#123; char *start, *end, *temp;//定义去除空格后字符串的头尾指针和遍历指针 temp = strIn; while (*temp == ' ') &#123; ++temp; &#125; start = temp; //求得头指针 temp = strIn + strlen(strIn) - 1; //得到原字符串最后一个字符的指针(不是'\0') printf("%c\n", *temp); while (*temp == ' ') &#123; --temp; &#125; end = temp; //求得尾指针 for (strIn = start; strIn &lt;= end; ) &#123; *strOut++ = *strIn++; &#125; *strOut = '\0';&#125; 程序代码转载自：daxueit.com 基础学的不扎实，期望以后能够努力学习。 浏览笔记https://stackoverflow.com/questions/1726302/removing-spaces-from-a-string-in-chttps://www.geeksforgeeks.org/remove-spaces-from-a-given-string/ 后记我文笔并不是很好，如果用WordPress博客程序写我估计会逻辑混乱，排版糟糕。哪位巨巨指点一下让我写的更好，感激不尽。]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[啃萝卜 - 一款优秀的Arduino图形化编程软件]]></title>
+    <url>%2FArduino%2FKRobot%2F</url>
+    <content type="text"><![CDATA[最近做的一个项目用到了Arduino IDE，在查找资料的时候无意中发现了一个优秀的图形化编程软件，叫“啃萝卜”，软件的英文名为“KRobot”。抱着试一试的心态去安装和使用了这个软件之后，我觉得这个软件非常的优秀。可以说是良心之作了。首先这个软件 Made in China 真的让我高兴和自豪，期待有一天它能够加上英文翻译，走向世界~然后这款软件的UI非常的新颖和友好，好像是扁平化风格，相比WIN10的严谨的扁平化，它更加的新颖和友好，可惜我不是专业的前端我也难以形容和表达对软件UI的喜爱和满意。提前贴一下他们的官网，大家进去能有一个直观的了解。www.kenrobot.com我晒一下软件的截图KRobot 不仅仅支持Windows操作系统，它还支持OS X，Linux，你甚至可以在浏览器上进行编程！ 第一次使用第一次遇到这个软件的时候，他的编程界面让我想起了庆祝《Kids Coding》问世 50 周年那个小游戏。如果你在12月4号的时打开过谷歌浏览器，会发现这个有趣的小游戏。我又把它翻出来拉。如果你感兴趣你可以进来看看：庆祝《Kids Coding》问世 50 周年后面我看看能不能把这个页面的程序给扣下来，直接在网站上跨域运行。KRobot也是一样的，这是KRobot的Arduino硬件接线部分。这是KRobot的Arduino图形化编程部分。图形化编程过后你还可以看看对应的原始代码。 深入了解KRobot的串口监视器同Arduino IDE一样，KRobot还有串口监视器，方便你调试程序。 内置示例同Arduino IDE一样，KRobot还有内置的示例，你如果是新手，选择内置实例中的一项，会一键生成代码并设置好硬件接线图。 开发板管理KRobot考虑的非常周到，加入了开发板管理，方便以后拓展和支持更多的开发板。 库管理KRobot加入了库管理，不过好像不能手工添加自己的库，可能是为了稳定性吧~ 设置你可以设置字体大小这些的，而且程序员非常的细心，加入了Tab的大小，这个非常有利于代码格式化。 使用后的感受简约而不简单程序界面简洁大气。极大的方便了用户的使用，尤其是对于新手来说，初次使用可能不会C语言。但有了图形化编程的对照，可以加快他们对编程语言，编程思想的学习。如果软件添加了各种各样的高级功能设置，反而不利于学习。 分栏清晰明了软件的分栏做的很好，硬件设置和软件编程区分的很开，文本编程和图形化编程不仅区分开了还支持2栏对照显示。 这是一个优秀的教学工具有着图形化编程语言作为解释，解读文本编程代码会更加的轻松。 这同样一款优秀的辅助工具没错，如果你熟悉了Arduino的编程语言和Arduino的各种库、各种函数，又不想手打。那你可以当代码的搬运工，直接将图形化编程语言转换为文本编程后复制代码和修改。 优秀的云同步和跨平台编程工具你可以将你的代码同步到你的KRobot帐号中，然后在其他的电脑上直接开始在网页中编程而不需要下载程序。 后记我写这篇文章，写到中间，电脑突然死机不能强制关机，还好sublime有临时记录缓存，不然我会很崩溃的。我期待KRobot程序会够做的更好，更完善，更强大。我文笔并不是很好，如果用WordPress博客程序写我估计会逻辑混乱，排版糟糕。哪位巨巨指点一下让我写的更好，感激不尽啊。]]></content>
+      <categories>
+        <category>Arduino</category>
+      </categories>
+      <tags>
+        <tag>Arduino</tag>
+        <tag>啃萝卜</tag>
+        <tag>图形化编程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[智能车库管理系统准备工作]]></title>
+    <url>%2FNodeMCU%2FSmart-Garage-Project-Preparation%2F</url>
+    <content type="text"><![CDATA[今天我抽时间设计了一下智能车库管理系统的电路。后期我会放出已经设计好的电路图。目前我使用的是NodeMCU，上面有一个简单的微控制系统和WIFI模块，集成度高体积小，非常适合这个项目。这次我为NodeMCU编写程序并烧录所使用的的IDE是Arduino，所以我需要提前了解一下，做一下准备工作。经过了解，Arduino是支持C语言的，这样我就不用在学习新的语言和查找资料了。 在使用Arduino编写程序前，我需要提前了解Arduino的用法，比如对引脚的控制。 pinMode()描述将指定的引脚配置为输入或输出。 语法pinMode(pin, mode) 参数pin：您希望设置其模式的引脚编号mode：INPUT，OUTPUT，或INPUT_PULLUP。 示例代码123456789101112void setup()&#123; pinMode(13, OUTPUT); // sets the digital pin 13 as output&#125;void loop()&#123; digitalWrite(13, HIGH); // sets the digital pin 13 on delay(1000); // waits for a second digitalWrite(13, LOW); // sets the digital pin 13 off delay(1000); // waits for a second&#125; digitalWrite()描述写一个HIGH或LOW到一个数字引脚如果该引脚的pinMode()被配置为OUTPUT，其电压将被设置为相应的值：5V（或在3.3V电路板上3.3V）为HIGH，0V（地）为LOW。如果该引脚被配置为INPUT，digitalWrite()将启用（HIGH）或禁用（LOW）输入引脚的内部上拉。建议设置pinMode()以INPUT_PULLUP使能内部上拉电阻。如果不设置pinMode()到OUTPUT，并连接一个LED到引脚，打电话时digitalWrite(HIGH)，该LED可能会出现昏暗。如果没有明确的设置pinMode()，digitalWrite()将启用内部上拉电阻，这就像一个大的限流电阻。 语法digitalWrite(pin, value) 参数pin：引脚号value：HIGH或LOW 示例代码123456789101112void setup()&#123; pinMode(13, OUTPUT); // sets the digital pin 13 as output&#125;void loop()&#123; digitalWrite(13, HIGH); // sets the digital pin 13 on delay(1000); // waits for a second digitalWrite(13, LOW); // sets the digital pin 13 off delay(1000); // waits for a second&#125; 浏览过的网站https://www.arduino.cc/en/Tutorial/HomePagehttps://www.arduino.cc/en/Tutorial/BuiltInExampleshttps://www.arduino.cc/en/Tutorial/Blinkhttps://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/ 后记准备工作做到这就差不多了，因为目前我好像只需要控制引脚就可以了，后面的串口收发函数明天再了解。我文笔并不是很好，如果用WordPress博客程序写我估计会逻辑混乱，排版糟糕。哪位巨巨指点一下让我写的更好，感激不尽啊。]]></content>
+      <categories>
+        <category>NodeMCU</category>
+      </categories>
+      <tags>
+        <tag>NodeMCU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用JSBox制作一个IP地址获取脚本]]></title>
+    <url>%2FJSBox%2Fjsbox-getip%2F</url>
+    <content type="text"><![CDATA[前阵子我在少数派看到了钟大写的JSBox介绍文章，才了解到钟大新写了一个JSBox APP。这让我想起了半年前Pin支持JS脚本时，我为了图新鲜写了一个IP地址获取脚本的事。可惜当时Pin才刚刚支持JS脚本，有一些UI方面的BUG，对我写的脚本并不是很友好。今天我从Pin交流群的群文件中下载了我以前写的脚本，发现勤劳的钟大将这些BUG都修复了。 JSBox简介我很懒，直接引用一下钟大对JSBox的介绍吧。文章来源：少数派 - JSBox: 一个创造工具的工具JSBox 是一个可以用来运行 JavaScript 脚本的 iOS 应用，你可以通过他来执行标准的 JavaScript 脚本。 这种执行不是指跑在浏览器上，而是执行在一个完全原生的环境，效率很高。 并且我们提供了很多 iOS 原生的接口，这意味着你可以通过他做很多事情，包括但不限于： 写一个用来查询汇率的脚本； 写一个用于计算小费的脚本； 通过接口实现一个小小的应用，提供丰富的界面； 写一个文本收藏工具，用于收藏常用的文字； 写一个下载 Twitter 视频的小工具；…… 其实 JSBox 是完完全全可编程的一个应用，他能做很多事情，所限制产出的往往只是动手能力。 为了更好的编写脚本，我们甚至提供了配套的 VSCode 插件，用于更高效率的编写和测试 JSBox 脚本，可以做的桌面端编写 iOS 端实时刷新。因为我们始终相信无论移动端的编辑器做的多么强大，编写代码的效率也始终被桌面端碾压。 所以，JSBox 并不是像 Pythonista 那样为了编写代码而生的应用，编写代码只是实现功能的手段，我们的一切最终都是为了效率的提高。 使用JSBox制作一个IP地址获取脚本新建JS脚本，添加以下代码 1234567891011121314151617181920function getip() &#123; var url = "ipip.net" $ui.toast("正在获取IP地址: " + url) $ui.loading(true) $http.get(&#123; url: "http://myip.ipip.net/", header: &#123; "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36" &#125;, handler: function(resp) &#123; $ui.loading(false) var data = resp.data $ui.alert(&#123; title: "IP信息如下", message: resp.data &#125;) &#125; &#125;)&#125;getip() 然后直接运行就可以了脚本下载地址：IP地址获取.js 运行效果 代码解读我不知道该不该写代码解读，看的懂代码的不需要，看不懂的。。尽量看注释部分理解吧 123456789101112131415161718192021222324252627282930//定义getip()函数function getip() &#123; //定义url为ipip.net var url = "ipip.net" //调用ui.toast函数，显示获取状态。具体看作者开发文档 //后面使用到的函数和介绍我在代码后面已经列出来了 $ui.toast("正在获取IP地址: " + url) //调用ui.loading函数，显示加载中。 $ui.loading(true) //http的get嘛，不多介绍了 $http.get(&#123; //调用ipip.net的api url: "http://myip.ipip.net/", //浏览器的UA模拟，这个很重要，不然没法获取返回参数的 header: &#123; "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36" //模拟浏览器的UA，这个很重要 &#125;, //调出弹出串口函数 handler: function(resp) &#123; $ui.loading(false) var data = resp.data $ui.alert(&#123; title: "IP信息如下", message: resp.data &#125;) &#125; &#125;)&#125;//使用getip()函数，运行getip() 调用的相关函数如下： $ui.toast(message) - 显示一个悬浮的提示信息，几秒后自动消失 $ui.loading(boolean) - 在主界面显示一个正在加载的提示框 $http.get(object) - 发起一个 GET 请求 $ui.alert(object) - 给用户一个 alert 框，用于提示或者选择 JSBox开发文档 JSBox 接口文档 JSBox 开源样例 后记我文笔并不是很好，如果用WordPress博客程序写我估计会逻辑混乱，排版糟糕。哪位巨巨指点一下让我写的更好，感激不尽啊。]]></content>
+      <categories>
+        <category>JSBox</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+        <tag>JSBox</tag>
+        <tag>IOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[基于NodeMCU制作的智能车库管理系统]]></title>
+    <url>%2FNodeMCU%2FGarage-Management-System%2F</url>
+    <content type="text"><![CDATA[一位群友求助群里的朋友，期望能够完善一下他自己的车库管理模块。他想让他自己的车进车库之前，车库门就能自动打开，灯也自动亮起来。群里的数位朋友们对此展开了讨论。开始我们的想法很简单，弄一个433m无线模块遥控就行了，只要车靠近，就能接收到433m无线模块的信号，直接打开车门。这是一个非常简单粗暴的一种方法，有不少不靠谱的地方。 车库管理系统的完善我和他讨论了一下，做了下面的完善。 精准确定车的位置 - 使用GPS模块。 判断车辆进出 - 使用2组激光传感器，门边一组，车库内一组 稳定的中央处理器 - 使用带有WIFI模块的NodeMCU 稳定的信号传输 - 正好双十二搞活动，买了个大功率的433m无线模块 启动项目目前我打算在淘宝买下面的零件和模块使用 GPS模块 45元 激光传感器 80元 NodeMCU 90元 433m无线模块 40元 433m无线模块天线 12元 433m无线模块天线调试器 20元 成本大概有300元左右了，想要便宜的请自行想办法节约成本，方法很多。 车库管理系统运行原理其实这个画一个原理图比较好，不过我现在没时间，后面有时间补上原理图。在这里先简述一下基本功能。 车进来时系统运行过程 车辆靠近车库1000米内的时候（433M能够发射接收的范围），会将GPS定位坐标发送到车库那。 当GPS定位坐标值接近车库的时候，车门自动打开，车库内的灯也自动打开。 车进车库的时候，会经过第一个激光传感器（防止车没进去车门就关闭了）。 车进来后，触发第二个激光传感器确认车已经进来了然后按需自动关闭车门（车库内的人走出来）。 车出去时系统运行过程 用户通过遥控器打开车门将车开出来，车内激光传感器恢复正常，车门口的激光传感器被触发。 车开出车库，车门口激光传感器和车内机关传感器都恢复正常工作状态，1分钟（自己设定）后车门自动关闭。 后记其实可以完善和补充的地方很多，但是我由于写这篇文章有些匆忙，后面再慢慢补充。这个车库管理系统设计我打算开源的，因为其难度并不是很大。期望能够帮助到各位电子爱好者，极客Geeker~]]></content>
+      <categories>
+        <category>NodeMCU</category>
+      </categories>
+      <tags>
+        <tag>NodeMCU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Centos7 安装 Docker]]></title>
+    <url>%2FDocker%2FCentos7-install-docker%2F</url>
+    <content type="text"><![CDATA[我最近刚刚开始学习Docker，因为目前有一些项目需要用到它。我在这里记一下笔记，因为我每次搜索安装教程和看官方文档挺烦的。 使用脚本自动安装Docker进入ssh，运行下面的命令即可 12curl -fsSL get.docker.com -o get-docker.shsudo sh get-docker.sh --mirror Aliyun 启动 Docker CE运行下面的命令启动 Docker CE并将其加入开机启动项 12sudo systemctl enable dockersudo systemctl start docker 建立 docker 用户组默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。而只有 root 用户和 docker 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 root 用户。因此，更好地做法是将需要使用 docker 的用户加入 docker 用户组。 建立 docker 组： 1sudo groupadd docker 将当前用户加入 docker 组： 1sudo usermod -aG docker $USER 退出当前终端并重新登录，进行如下测试。 测试 Docker 是否安装正确1docker run hello-world 一次性复制粘贴我很懒，把代码整合起来，下次直接一次性复制粘贴吧~ 1234567curl -fsSL get.docker.com -o get-docker.shsudo sh get-docker.sh --mirror Aliyunsudo systemctl enable dockersudo systemctl start dockersudo groupadd dockersudo usermod -aG docker $USERdocker run hello-world 后记本文转载自Github：Docker — 从入门到实践]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux下解压.tar.bz2格式的压缩包]]></title>
+    <url>%2FLinux%2Flinux-untar-tar-bz2%2F</url>
+    <content type="text"><![CDATA[今天我下载了一个文件，是.tar.bz2格式的但是我用在网上找的解压命令无论怎么样都无法解压，耐心查看了一下错误输出信息，原来缺少bzip2组件导致的。 安装bzip2组件Centos系统运行下面的命令安装bzip2： 12yum install bzip2 -yapt-get -y install Debian/Ubuntu 则用下面的命令安装bzip2： 12yum install bzip2 -yapt-get -y install 解压命令老版本的linux要两步，一步是解压缩，一步是解包 12bzip2 -d file.tar.bz2 ##将文件解压成file.tartar -xvf file.tar ##解包 解完之后会出现多一个文件夹 file或者直接执行下面的命令解压 1tar -jxvf file.tar 参考文章CSDN - tar.bz2 解压命令。：点击查看百度知道 - Linux下如何解压.tar.bz2格式的压缩包：点击查看 后记其实我并非看上面的两个文章解决的问题的，方法是在stackexchange.com找到的。有趣的是，回答这个问题答案，被投了负分，可能是大家觉得他答非所问把~然而我却通过他给出的方法解决了问题（滑稽）。见图：引用一下： you can try install bzip2 by command: yum install bzip2 -y (Centos) and extract again: tar -xjvf yoono-destop-1.8.43.tar.bz2 解决问题的时候再看看他被点了负分的回答，感觉挺好笑的。大家可以去围观一下，挺有意思的：How to unpack a downloaded tar.bz2 archive?]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo 添加分类并在菜单中显示]]></title>
+    <url>%2FHexo%2Fhexo-add-categories%2F</url>
+    <content type="text"><![CDATA[我朋友和我也一样使用了Hexo，他曾经问过我怎么添加分类。我却不好回答，因为网上教程不少，我也是参考网上教程来的。其实Hexo添加分类很简单的。 新建页面新建一个页面，命名为 categories 。命令如下： 1hexo new page categories 编辑页面编辑刚新建的页面，将页面的类型设置为 categories ，主题将自动为这个页面显示所有分类。 123title: 分类date: 2014-12-22 12:39:04type: "categories" 为分类关闭评论注意：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如： 1234title: 分类date: 2014-12-22 12:39:04type: "categories"comments: false 在菜单中添加链接在菜单中添加链接。编辑主题的 _config.yml ，将 menu 中的 categories: /categories 注释去掉，如下: 12345menu: home: / categories: /categories archives: /archives tags: /tags 上面的文章也是我转载的Hexo Wiki:创建分类页面]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo next主题优化]]></title>
+    <url>%2FHexo%2Fhexo-optimization%2F</url>
+    <content type="text"><![CDATA[今天我对Hexo进行了一些优化，需要进行代码压缩。在网上找了很多的教程，大多数都使用gulp这个插件进行代码压缩，但我不建议大家使用。因为我使用的过程中发现这个可能无法压缩部分JS。导致出错，原因是较旧的uglify不支持ES6。所以我个人建议大家使用hexo-all-minifier hexo-all-minifier 介绍hexo-all-minifier项目地址：在Github查看hexo-all-minifier项目引用一下官方说明： Integrate all the official minifier plugins of HEXO and a imagemin plugin:译：本插件集成了Hexo官方minifier插件和imagemin插件： hexo-html-minifier, 基于 HTMLMinifier hexo-clean-css, 基于 clean-css hexo-uglify, 基于 UglifyJS hexo-imagemin, 基于 imagemin hexo-all-minifier 安装在hexo目录中运行下面的命令 1npm install hexo-all-minifier --save 在hexo配置文件中插入下面的代码 1all_minifier: true 执行代码刷新，查看效果 12hexo ghexo d hexo-all-minifier 配置其实这个官方有详细的说明，我先贴一下，后面有时间的话进行翻译:star2::new:!NEW 1234js_concator: enable: false bundle_path: '/js/bundle.js' front: false enable - Enable the Js concator. Defaults to false. bundle_path - The output path of the bundle script. It will be set as absolute path to the root dir. front - Put the bundle script in the front of all scripts in body tag. Default to false, which means the bundle script will be placed in the back of other scripts. The concator will concat all local scripts into one bundle script and attach it to the end of html’s body tag.More detail control will be allowed in the future version. 1234html_minifier: enable: true ignore_error: false exclude: enable - Enable the HTML minifier. Defaults to true. ignore_error - Ignore the error occurred on parsing html. exclude - Exclude files. Glob is support. 1234css_minifier: enable: true exclude: - '*.min.css' enable - Enable the CSS minifier. Defaults to true. exclude - Exclude files. Glob is support. 1234567js_minifier: enable: true mangle: true output: compress: exclude: - '*.min.js' enable - Enable the JS minifier. Defaults to true. mangle: Mangle file names output: Output options. If it is empty, please remove it from the .yml file! Otherwise it will be set to null, which is different from undefined. compress: Compress options. If it is empty, please remove it from the .yml file! Otherwise it will be set to null, which is different from undefined. exclude: Exclude files. Glob is support. 1234567image_minifier: enable: true interlaced: false multipass: false optimizationLevel: 2 pngquant: false progressive: false enable - Enable the image minifier. Defaults to true. interlaced - Interlace gif for progressive rendering. Defaults to false. multipass - Optimize svg multiple times until it’s fully optimized. Defaults to false. optimizationLevel - Select an optimization level between 0 and 7. Defaults to 2. pngquant - Enable imagemin-pngquant plugin. Defaults to false. progressive - Lossless conversion to progressive. Defaults to false. exclude - Exclude specific types of image files, the input value could be gif,jpg, png, or svg. Default to null. Glob is not support.]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Next</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[“华为畅玩4”安卓手机使用感受]]></title>
+    <url>%2FAndroid%2Fuse-android-first%2F</url>
+    <content type="text"><![CDATA[我有3个电信卡，所以我最近要弄一台备用的手机。我在转转那找到一台华为畅玩4的安卓手机，同城面交，花了259元。我说一下我用这台手机的感受吧。 声明这是使用3年iPhone6之后和259元买的“华为”安卓机做对比后的感受，不能作为参考！这篇文章写于2017年12月9日，这时候的iPhone6和华为畅玩4都已经算是老手机了！如果对本文有哪方面不同意或者有看法和意见，请在下方留言。无法留言的请自备梯再上本站。 初试拿到手机，我也懒得刷机，直接恢复了出厂设置。因为我看那卖家应该是个会玩的，刷的基带应该挺稳，系统也应该是最新的。恢复好系统后，出厂设置好后，开始使用。 连接WIFI我们宿舍有支持5G WIFI的路由器，这台手机无线模块是不支持的，所以搜不到信号，后来连的2.4G WIFI的信号。 安装APP安装APP用的华为应用商店，界面看上去有点。。乱，复杂，有点广告扎堆的感觉。苹果也有这个现象，但并不是很严重。 想了一下，懒得安装APP了，我这个用来接短信接电话就行了。 界面UI看到主屏幕，恢复系统后自带的一堆用不到的APP，心塞得很，也懒得排版布置，以及~卸载。 长时间使用长时间使用的话，头特别疼，可能是由俭入奢易由奢入俭难把。头太疼了不能用这个安卓手机了。 总体感受APP商店：贵圈太乱手机管理：细节做的太多了，各种花式弹窗。对于爱折腾的同学来说，各种DIY也是不错的长时间使用的话，头会很痛很痛。 重点这是使用3年iPhone6之后和259元买的“华为”安卓机做对比后的感受，不能作为参考！ 建议 不喜欢折腾的同学还是用苹果把，或者稍微正常点的安卓机。 给你的父母优先使用iPhone5 or iPhone5s，太新的安卓机，我觉得他们用着会很难受有风险。 如果你想使用安卓系统的时候有更好的感受，请买高端安卓机。 不要买1000 2000的安卓机了，一分钱一分货。可能你新买到的1000元的手机不如已经过时的iPhone5s。我同学就是个例子，手机很新，但是却搜不到WIFI的5G信号，他们在WIFI模块那省了一些钱~~ 后记 用安卓低端机，严重拉低了我对安卓系统和安卓手机的评价和印象，我的感觉非常非常的不好。 我并不是针对华为，针对安卓系统和安卓手机，我只是客观的说出我的感受，花粉和各位使用安卓的朋友不要误会。 期望后面我能用到好一点的安卓机，我要换手机了（目前使用的是iPhone6，它已经陪伴我3年了），期望买到稍微好一点的手机，我正在安卓和苹果之间犹豫不决。 这篇文章并没有结束，只是我的感受太多（外加头疼！！！！）并且难以形容，我就先写到这了。]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>Huawei</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo 中英文之间自动添加空格]]></title>
+    <url>%2FHexo%2Fhexo-chinese-english-space%2F</url>
+    <content type="text"><![CDATA[写文章的时候发现，如果总是自己手动在中英文之间加空格是一件很烦人的事情。于是在网上找了一下文章，找到几个不错的方法。 使用pangu.js具体参考 https://github.com/vinta/pangu.js?utm_source=next.36kr.com 引用一段原文（繁转简） 如果你跟我一样，每次看到网页上的中文字和英文、数字、符号挤在一块，就会坐立难安，忍不住想在它们之间加个空格。这个外挂（支援 Chrome 和 Firefox）正是你在网路世界走跳所需要的东西，它会自动替你在网页中所有的中文字和半形的英文、数字、符号之间插入空白。 汉学家称这个空白字元为「盘古之白」，因为它劈开了全形字和半形字之间的混沌。另有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在34 岁的时候跟自己不爱的人结婚，而其余三成的人最后只能把遗产留给自己的猫。毕竟爱情跟书写都需要适时地留白。 与大家共勉之。 这位高人写了很多的脚本，有PHP的，有C语言的，当然也有在HTML中插入JS的。 npm一键安装（常规安装）cd到安装目录之后运行下面的代码即可 1npm install pangu --save Hexo插件（笔者推荐）cd到博客目录之后运行下面的代码即可 1npm install hexo-pangu-spacing --save 后记我推荐使用Hexo插件，目前没有碰到什么BUG，如果你直接运行npm install pangu –save 好像是没有效果的，你可能需要再调一下才能生效。]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Centos7安装Node.js和npm]]></title>
+    <url>%2FNode-js%2Fcentos7-install-nodejs%2F</url>
+    <content type="text"><![CDATA[弄这个博客程序hexo前，我必须要安装Node.js，我在安装Node.js上却花了不少时间。本来简简单单的yum一键安装就可以了，为什么我要花这么长时间去编译安装呢？强迫症把？ 官方文档其实官方文档写的非常详细，你们可以看看：查看官方文档 Node.js一键安装命令一般情况下，Centos7只需要运行下面的命令就可以进行Node.js的安装了 1sudo yum install nodejs npm Node.js一键安装命令加强版你也可以自己换官方源，安装更新版本 123456#稳定版本用这个curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -#最新版本用这个curl --silent --location https://rpm.nodesource.com/setup_9.x | sudo bash -#yum快速安装sudo yum install nodejs npm --enablerepo=epel Node.js手工编译安装然而我在Yum安装后运行下面的命令查看版本，就不是很愉快了。 1node -v 返回的是老版本信息。于是我想到了手工编译安装首先安装编译工具 1sudo yum install gcc-c++ make 然后手工编译Node.js 12345678#手工编译Node.jswget http://nodejs.org/dist/node-latest.tar.gztar -zxf node-latest.tar.gzcd node-v*./configuremake &amp;&amp; make install#npm直接yum安装就行了，hmmmmm允许我先偷个懒sudo yum install nodejs npm --enablerepo=epel 再查一下版本，哇~最新版本了唉 推荐安装一下NvmNVM（Node version manager）顾名思义，就是Node.js的版本管理软件，可以轻松的在Node.js各个版本间切换，项目源码见GitHub访问Github:NVM Github运行下面的命令进行安装，wget 和 curl方式自己选一个就可以了 123456#curl安装了就不用执行wget安装了，没有curl就执行yum install curlcurl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash#wget安装了就不用执行curl安装了，没有wget就执行yum install wgetwget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash#开始安装source ~/.bash_profile 列出所需要安装的版本 1nvm list-remote 执行后会返回一堆版本号，自己选一个版本进行安装就可以了 12#安装v0.10.30版本nvm install v0.10.30版本 查看已安装的版本 1nvm list 切换版本 1nvm use v0.10.30 设置默认版本 1nvm alias default v0.10.30 其他的安装方式我这儿就不列出来了官方文档写的非常详细，你们可以看看：查看官方文档]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>Centos7</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[VS2013下 OpenCV3.0.0配置]]></title>
+    <url>%2FOpenCV%2Fvs2013-opencv%2F</url>
+    <content type="text"><![CDATA[今天我编译一个项目，需要用到OpenCV以编译项目。这是我部署VS2013-OpenCV 3.0.0环境的笔记。 下载和安装OpenCV下载并解压OpenCV前往官方网站，下载对应版本OpenCV，这次我下载的是3.0.0版本的，因为我用的是VS2103官方下载地址：跳转到opencv.org打开安装包，设置opencv sdk解压目录，点击Extract后解压。 设置opencv的环境变量“开始菜单”-&gt; “控制面板”-&gt;“系统”或在“计算机”上右键选“属性”打开系统设置窗口选择“高级系统设置”打开“系统属性”窗口选择“高级选项卡“，点击“环境变量”按钮打开“环境变量”窗口在系统变量里找到Path变量，在Path中添加值SDK中的bin目录。本人解压时设置的目录是E:\SDK，用到是32位库，VC++用的是2013，因此添加到bin目录为E:\SDK\opencv\build\x86\vc12\bin。注：环境变量配置后，需重启系统才能生效。 VC++工程配置打开vs2013，选择新建项目。选择Visual C++模板创建空项目。项目建好后，点击“菜单”-&gt;“项目”-&gt;“属性”，打开项目属性对话框，选择“C++目录”对SDK目录进行配置。选择“包含目录”，在下拉菜单中选择“编辑”，打开包含目录对话框。添加前面介绍过的SDK中的include文件夹的路径。选择“库目录”，在下拉菜单中选择“编辑”，打开包含目录对话框。添加前面介绍过的SDK中的lib文件夹的路径。这里需要注意点，开发32位程序选择x86目录下的，64位则选X64目录下的，同时还要根据自己所用的VC++版本选择相应的vcXX目录。我要开发的是32位程序，使用的2013因此，选择的是X86中vc12下的lib文件夹。接下来是配置项目所需的静态链接库。选择“链接器”下的“输入”，在“附加依赖项”下拉项中选择“编辑”，打开附加依赖项对话框。在附加依赖项中添加opencv_core248d.lib，这是opencv最基本的类和函数；添加opencv_highgui248d.lib，它是opencv提供的简单gui；添加opencv_imgproc248d.lib，它提供了一些基础的图像处理操作。简单的运用，这三个库基本够了。用到其他opencv功能时，只需按照所用函数所在的头文件名，添加相应的lib文件就行了。注：前面设置的是新建工程的Debug版配置，切换到Release用同样的方法配置就可以，唯一的区别是Debug版用到的dll和lib文件都有后缀d，Release版使用的不带d。配置Release的附加依赖项时别忘了把d删掉。 测试OpenCV配置是否正确在解决方案中，在项目上右键，选择添加新建项。在对话框中选择添加C++文件。在新建的C++文件中写上一个最简单的测试代码生成后运行。如果配置无误，生成的程序就能正常运行了。如果提示缺少dll文件，是环境变量没配置对，重新配置环境变量或将SDK中bin目录中的相应dll文件靠到工程目录下或系统所在盘Windows\System32下就可以解决。如果是提示链接错误，是附加依赖项没设置对，或没有添加够所需的lib文件。这里来段用OpenCV打开并显示图片的代码 123456789101112131415#include &lt;opencv2\opencv.hpp&gt;using namespace cv;int main()&#123; Mat img = imread("E:/lena.png"); //新建一个矩阵用来存放从文件读取的图片 namedWindow("image",CV_WINDOW_AUTOSIZE); //创建一个窗口，窗口标题设为image，并设成自动大小 imshow("image",img); //在image名字的窗口中显示img中的图像 waitKey(); //等待键盘输入 return 0; //程序结束&#125; 按Ctrl +F5编译运行 测试成功！例子中所用的测试图片是OpenCV自带的lena.png。看过图像学书的是不是觉着这图很眼熟，似乎所有图像学的书都会用到这图。这图基本上可以算图像学的一个标准用图了，不过这图并不是完整版哦，它只是截取了其中的一部分。 OpenCV SDK文件夹结构简介解压后再解压目录下有OpenCV目录在opencv文件夹下有build和sources两个文件夹，build是sdk 包，sources是源码包（里面也有opencv使用例子源码） 在build文件夹下include是C&amp;C++头文件所在文件夹；doc是文档文件夹；java是java开发的库文件夹；python是pathon开发库文件夹；x64和X86是已编译好的C&amp;C++的64位和32位库文件夹，在它里面有vc10、vc11、vc12三个文件夹，分别对应VC++2010、VC++2012和VC++2013。 因不同版本VC++生成的库文件所需的运行时不同，因此配置VC++工程时需要选择相对应的二进制库文件。在vcXX文件夹下bin文件夹是公用的动态链接库，在系统环境变量里配置后，所以opencv工程都能共享他们；lib文件夹是动态库隐式调用所需的静态链接文件；staticlib文件夹是静态链接库，需要生成不依赖动态库的程序就是用它们。]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>VS2013</tag>
+        <tag>OpenCV</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[人工智能与谷歌浏览器小游戏 - 小恐龙 Flappy T-Rex]]></title>
+    <url>%2FAI%2FIAMDinosaur%2F</url>
+    <content type="text"><![CDATA[无意中发现了一个有意思的AI开源项目项目名称：IAMDinosaur项目地址：跳转到Github IAMDinosaur项目简介 A simple artificial intelligence to teach Google Chrome’s offline dinosaur to jump cactus, using Neural Networks and a simple Genetic Algorithm. 译：这是一个简单的人工智能，教导谷歌 Chrome浏览器的离线游戏 小恐龙 Flappy T-Rex，这个项目使用了神经网络算法和一个简单的遗传算法。 IAMDinosaur视频简介感兴趣的话可以看看视频介绍：跳转到 Youtube查看本站也提供视频的播放 工作原理We have 3 different inputs read from the pixels of the screen: Distance from the next cactus Length of the next cactus Speed of the current cactus We have also, one output with 3 possible states: output &lt; 0.45: Press DOWN key output &gt; 0.55: Press UP key default: Release both keys 具体请见项目地址：跳转到Github]]></content>
+      <categories>
+        <category>AI</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>人工智能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用phpmyadmin批量修改Mysql数据库的某列数据]]></title>
+    <url>%2FMysql%2Fbatch-modify-column-data%2F</url>
+    <content type="text"><![CDATA[今天弄的也不算很多，但是比较有意义。今天我修复了朋友的网站，他网站因为某些设置出错，需要批量修改数据库表中的某列数据。 打开phpmyadmin，执行以下命令即可。 1update 表名 set 列名=值; 作用就是批量修改某个表中的列数据为新值。这个很方便也很粗暴。]]></content>
+      <categories>
+        <category>Mysql</category>
+      </categories>
+      <tags>
+        <tag>phpmyadmin</tag>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[整理的AI开源项目]]></title>
+    <url>%2FAI%2Fartificia-intelligence-example-code%2F</url>
+    <content type="text"><![CDATA[今天我啥都没做，但是我发现了一些有趣的开源项目。 搜索 ARTIFICIAL INTELLIGENCE SAMPLE SOURCE CODE 即可 https://www.programmableweb.com/category/artificial-intelligence/source-code http://meta-guide.com/software-meta-guide/100-best-github-artificial-intelligence http://freshmeat.sourceforge.net/tags/artificial-intelligence?page=5&amp;with=&amp;without=]]></content>
+      <categories>
+        <category>AI</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>人工智能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Altium Designer 笔记]]></title>
+    <url>%2FAltium-Designer%2Faltium-designer-study%2F</url>
+    <content type="text"><![CDATA[这儿我简单的记一下Altium Designer布线的时候学习到的一些技巧 自动布线后选择部分布线可以试试用Ctrl + 左键选择同一网络的布线。然后用shift + 左键批量选择 选择同一网络的另一个快捷键是S + P，但不友好。 批量修改布线选好之后，按F11进行修改线宽 画原理图45°角走线按shift + 空格 换计量单位按ctrl + q可以切换单位]]></content>
+      <categories>
+        <category>Altium Designer</category>
+      </categories>
+      <tags>
+        <tag>Altium Designer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Altium Designer 18.0.8 Beta 下载安装]]></title>
+    <url>%2FAltium-Designer%2Faltium-designer-18%2F</url>
+    <content type="text"><![CDATA[Altium designer 18是一款非常好用的PCB设计软件，从事pcb行业的用户都知道，这款软件更新速度特别快，新版的altium designer 18最大的亮点是采用了新的 DirectX 3D渲染引擎，不仅如此，很多用户使用了17版本之后，感觉最大的问题是卡屏，所以altium designer 18破解版采用了Dark暗夜风格的全新UI界面，还增强了BoM清单功能和ActiveBOM功能，使得卡顿问题得到了较大的解决。需要的用户可以来试试。 Altium Designer 18.0.8 介绍新一代的PCB设计软件—Altium Designer 18(业内也称AD18)已经推出，该版本包含一系列改进和新特性，增强的BoM清单功能，进一步增强了ActiveBOM功能，采用Dark暗夜风格的全新UI界面，并且一直被人诟病的卡顿问题也得到了极大的改进。Altium Designer 18是一款简单易用、原生3D设计增强的一体化设计环境，结合了原理图、ECAD库、规则和限制条件、BoM、供应链管理、ECO流程和世界一流的PCB设计工具，采用ActiveBOM和Altium数据保险库，设计者能在设计过程的任何时刻都可以查看元器件的供应链信息，可以有效提高整个设计团队的生产力和工作效率，为您节省总体成本、缩短产品上市时间。 Altium Designer 18.0.8 安装不多介绍，下载压缩包后解压，运行AltiumDesigner18Setup.exe即可 Altium Designer 18.0.8 设置为中文和激活 安装完成后，运行&lt;spaAltium Designer 18，软件默认英文，我们点击右上角的齿轮 点击“system”》“general”》勾选“use localized resources”，然后重启软件就可以体验简体中文界面 打开安装包“Crack”目录，将“shfolder.dll”复制到AD18安装目录下(此操作不会触发覆盖) 单机添加单机版license文件 选择安装包，Licenses目录下任意一个文件载入即可，Altium Designer 18破解版安装完成。 Altium Designer 18.0.8 下载地址百度网盘下载地址：[点击进入百度网盘](链接: https://pan.baidu.com/s/1bptZim7) 密码: wi8g备用下载地址：[点击进入备用节点](链接: https://pan.baidu.com/s/1bptZim7) 后记Altium Designer 18 beta全是BUG，不用下载了。直接上AD17把。刚刚笔者测试了一下，WIN10下是动不动就崩溃，我无话可说~ 转载来源吴川斌的博客多多软件站]]></content>
+      <categories>
+        <category>Altium Designer</category>
+      </categories>
+      <tags>
+        <tag>Altium Designer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[NodeMCU使用App(iOS Swift)点亮LED小灯]]></title>
+    <url>%2FNodeMCU%2Fiot-esp8266-12e-tutorial-controlling-led-over-web-with-ios-swift-app%2F</url>
+    <content type="text"><![CDATA[转载来源这是我转载的老外的教程，视频来源：跳转到 Youtube查看 视频教程 视频简介在这个视频中，我们学习了如何使用esp8266-12e和iOS来控制led。 模块本身不到10美元，所以与其他物联网设备相比，制作这个项目并不需要太多的费用。 视频中的程序代码（不包含IOS APP代码）123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103#include &lt;ESP8266WiFi.h&gt;//////////////////////// WiFi Definitions ////////////////////////const char WiFiAPPSK[] = "esp8266-12e";/////////////////////// Pin Definitions ///////////////////////const int LED_PIN = 16; // Thing's onboard, green LEDWiFiServer server(80);void setupWiFi()&#123; WiFi.mode(WIFI_AP); // Do a little work to get a unique-ish name. Append the // last two bytes of the MAC (HEX'd) to "ThingDev-": uint8_t mac[WL_MAC_ADDR_LENGTH]; WiFi.softAPmacAddress(mac); String macID = String(mac[WL_MAC_ADDR_LENGTH - 2], HEX) + String(mac[WL_MAC_ADDR_LENGTH - 1], HEX); macID.toUpperCase(); String AP_NameString = "ESP-" + macID; char AP_NameChar[AP_NameString.length() + 1]; memset(AP_NameChar, 0, AP_NameString.length() + 1); for (int i=0; i&lt;AP_NameString.length(); i++) AP_NameChar[i] = AP_NameString.charAt(i); WiFi.softAP(AP_NameChar, WiFiAPPSK);&#125;void initHardware()&#123; Serial.begin(115200); pinMode(LED_PIN, OUTPUT); digitalWrite(LED_PIN, LOW); // Don't need to set ANALOG_PIN as input, // that's all it can be.&#125;void setup() &#123; initHardware(); setupWiFi(); server.begin();&#125;void loop() &#123; // Check if a client has connected WiFiClient client = server.available(); if (!client) &#123; return; &#125; // Read the first line of the request String req = client.readStringUntil('\r'); Serial.println(req); client.flush(); // Match the request int val = -1; // We'll use 'val' to keep track of both the // request type (read/set) and value if set. if (req.indexOf("/led/0") != -1) val = 1; // Will write LED high else if (req.indexOf("/led/1") != -1) val = 0; // Will write LED low // Set GPIO5 according to the request if (val &gt;= 0) digitalWrite(LED_PIN, val); client.flush(); // Prepare the response. Start with the common header: String s = "HTTP/1.1 200 OK\r\n"; s += "Content-Type: text/html\r\n\r\n"; s += "&lt;!DOCTYPE HTML&gt;\r\n&lt;html&gt;\r\n"; // If we're setting the LED, print out a message saying we did if (val &gt;= 0) &#123; s += "LED is now "; s += (val)?"off":"on"; &#125; else &#123; s += "Invalid Request.&lt;br&gt; Try /led/1, /led/0, or /read."; &#125; s += "&lt;/html&gt;\n"; // Send the response to the client client.print(s); delay(1); Serial.println("Client disonnected"); // The client will actually be disconnected // when the function returns and 'client' object is detroyed&#125;]]></content>
+      <categories>
+        <category>NodeMCU</category>
+      </categories>
+      <tags>
+        <tag>NodeMCU</tag>
+        <tag>ESP8266</tag>
+        <tag>App</tag>
+        <tag>iOS</tag>
+        <tag>Swift</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[NodeMCU/ESP8266 驱动 OLED 0.96″ 128×64 I2C SSD1306 显示]]></title>
+    <url>%2FNodeMCU%2Fesp8266-oled-display%2F</url>
+    <content type="text"><![CDATA[转载来源这是我转载的老外的教程，视频来源：跳转到 Youtube 查看 视频教程 视频简介本视频介绍了如何使用 NodeMCU/ESP8266 驱动 OLED 屏幕显示。视频中代码下载地址（原地址）：https://github.com/squix78/esp8266-fritzing-parts备用地址（本站）：https://files.itnote.me/itnote/esp8266-fritzing-parts-master.zip]]></content>
+      <categories>
+        <category>NodeMCU</category>
+      </categories>
+      <tags>
+        <tag>NodeMCU</tag>
+        <tag>ESP8266</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[中国移动物联网麒麟版 mini 开关量输入检测]]></title>
+    <url>%2F%E7%89%A9%E8%81%94%E7%BD%91%2Fchina-mobile-internet-of-things-unicorn-mini-io%2F</url>
+    <content type="text"><![CDATA[用了一阵麒麟版，我觉得很有意思。我用麒麟版实验了温湿度例程，流水灯例程。但是找了半天没有找到开关量输入检测的。而我需要检测外置传感器信号。我有一个红外线避障传感器和一个人体热释传感器，都是满足条件输出高电平的，然后单片机就需要在检测到高电平后，执行某些动作（程序）。我知道开发板是用的stm32芯片，所以我在网上找了一下相关lib（也就是库），看看能不能直接调用。还真找到现成的了。这是我找到的一些资料，在这里做一下整理。 GPIO输入当GPIO连接了外部传感器，而传感器的信号是开关量的时候，GPIO可能需要去轮询输入的状态是高是低，这时候GPIO就需要当做输入来用。按键的动作可以用来模拟传感器的动作，按键通过上拉电阻接到高电平。当按键按下时，会使相应的GPIO管脚变成低电平。配置这些GPIO引脚为上拉模式，在没有收到信号的情况下，保持这些GPIO口为高电平。GPIO的库函数也为我们提供了读取某指定端口管脚的输入– GPIO_ReadInputDataBit 正是这样一个函数 函数名 GPIO_ReadInputDataBit函数原形 u8 GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, u16 GPIO_Pin)功能描述 读取指定端口管脚的输入输入参数1 GPIOx ：x 可以是A，B ，C ，D 或者E，来选择GPIO外设输入参数2 GPIO_Pin：待读取的端口位返回值 输入端口管脚值，高或者低u8 ReadValue;ReadValue = GPIO_ReadInputDataBit(GPIOx, GPIO_Pin_x);返回值ReadValue反应了GPIO口的高低状态。 上面的就是我找的资料了，非常实用。然后我又找了一些现成的例程，修改了一下就可以直接上手使用。 开关量检测程序首先要初始化一下IO口，初始化为输入模式 123456789101112/* * @brief 初始化按键 * @param 无 * @retval 无 */void Key_GPIO_Config(void)&#123; GPIO_InitTypeDef GPIO_InitStructure; RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE); GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0; // 选择按键引脚PA0 GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; // 设置引脚模式为浮空输入 GPIO_Init(GPIOA, &amp;amp;GPIO_InitStructure); // 初始化按键&#125; 然后在main()中直接使用函数 1234567891011121314151617181920212223242526// 定义控制LED的引脚#define LED_TOGGLE LED_Control(GPIOB, GPIO_Pin_0)// 使用带参宏输出LED灯的另一种状态#define LED_Control(GPIOx, GPIO_Pin) &#123;GPIOx-&amp;gt;ODR ^= GPIO_Pin;&#125;int main(void) &#123; uint8_t SaveStatus = 0; uint8_t State; LED_GPIO_Config(); Key_GPIO_Config(); while (1) &#123; State = Key_DETECTOR(GPIOA, GPIO_Pin_0); if (SaveStatus != State) &#123; if (State == 1) &#123; LED_TOGGLE; &#125; SaveStatus = State; &#125; &#125;&#125; 笔记整理我浏览了很多的网站，上面的部分内容就来自这些网站，谢谢这几位朋友给我带来的帮助。然后我整理了一下这些网站，如果大家不是很清楚，可以进来更多的了解。 http://blog.csdn.net/kevinhg/article/details/17490273http://blog.csdn.net/wjjontheway/article/details/9302189http://blog.csdn.net/u010657219/article/details/41810771http://blog.csdn.net/persistvonyao/article/details/38542847http://blog.csdn.net/huangchijun11/article/details/53321566https://zhuanlan.zhihu.com/p/23662301?refer=stm32]]></content>
+      <categories>
+        <category>物联网</category>
+      </categories>
+      <tags>
+        <tag>中国移动</tag>
+        <tag>物联网</tag>
+        <tag>麒麟版</tag>
+        <tag>Iot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Nginx 反向代理 Google Font、Ajax 和 Gravatar 头像]]></title>
+    <url>%2FNginx%2Fnginx-proxy%2F</url>
+    <content type="text"><![CDATA[本文介绍了如何使用 Nginx 反向代理 Google Font、Ajax 和 Gravatar 头像。用以解决国内无法正常访问 Google Font、Ajax 和 Gravatar头像而导致的网站加载速度慢的问题。 安装 NginxNginx 的安装方式有很多，本文只介绍 Centos7 下 Nginx 的安装方法。 官方教程参考官方教程参考：Install Nginx 在 Centos 7 下使用 yum 安装 Nginx通过 ssh 进入系统后，执行以下命令： 1234567891011#安装 EPELsudo yum install epel-release#安装 Nginxsudo yum install nginx# 将Nginx服务加入开机自启动，默认安装完服务是没有开启的，需要手动进行开启sudo systemctl enable nginx.servicesudo systemctl restart nginx.service# 查看端口状态，打开防火墙sudo firewall-cmd --permanent --zone=public --add-service=http sudo firewall-cmd --permanent --zone=public --add-service=httpssudo firewall-cmd --reload 访问页面：http://你的服务器IP/ 查看是否正常 参考教程: How To Install Nginx on CentOS 7 使用LNMP.ORG一键包安装 NGINX1234567# 安装命令行终端切换的自由软件 GNU Screenyum install screen# 下载并安装LNMP一键安装包cd ~wget -c http://soft.vpser.net/lnmp/lnmp1.4.tar.gz &amp;&amp; tar zxf lnmp1.4.tar.gz &amp;&amp; cd lnmp1.4 &amp;&amp; ./install.sh lnmp#运行安装脚本./install.sh 然后根据提示进行安装即可，这儿我们只安装Nginx 参考教程: LNMP一键安装 使用Oneinstack一键包安装NGINX123456789yum -y install wget screen curl python #for CentOS/Redhat# apt-get -y install wget screen curl python #for Debian/Ubuntuwget http://aliyun-oss.linuxeye.com/oneinstack-full.tar.gz #阿里云经典网络下载wget http://mirrors.linuxeye.com/oneinstack-full.tar.gz #包含源码，国内外均可下载wget http://mirrors.linuxeye.com/oneinstack.tar.gz #不包含源码，建议仅国外主机下载tar xzf oneinstack-full.tar.gzcd oneinstack #如果需要修改目录(安装、数据存储、Nginx日志)，请修改options.conf文件screen -S oneinstack #如果网路出现中断，可以执行命令`screen -R oneinstack`重新连接安装窗口./install.sh #注：请勿sh install.sh或者bash install.sh这样执行 参考教程: OneinStack安装教程 配置 Nginx添加 Nginx 缓存进入ssh，执行以下命令 12mkdir -p /var/cache/nginx/cachemkdir -p /var/cache/nginx/temp 修改Nginx文件，加入下面的代码 1234567### Nginx Cache Settings##proxy_temp_file_write_size 128k;proxy_temp_path /var/cache/nginx/temp;proxy_cache_path /var/cache/nginx/cache levels=1:2 keys_zone=cache_one:50m inactive=7d max_size=5g; Nginx 反向代理配置文件参考在Nginx文件夹下创建conf文件，用于反代。 google-ajax.conf - 反向代理 Google AjaxGitlab：google-ajax.conf直接下载：google-ajax.conf修改替换其中的ajax.css.network为自己的域名即可。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859upstream googleajax &#123; server ajax.googleapis.com:443;&#125;server &#123; listen 80; server_name ajax.css.network; resolver 8.8.8.8; location / &#123; proxy_pass_header Server; proxy_set_header Host ajax.googleapis.com; proxy_set_header Accept-Encoding &apos;&apos;; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Scheme $scheme; proxy_pass https://googleajax; proxy_cache cache_one; proxy_cache_valid 200 304 365d; proxy_cache_key $host$uri$is_args$args; expires max; &#125;&#125;server &#123; listen 443 ssl spdy; ssl on; ssl_certificate /root/ssl/css.crt; ssl_certificate_key /root/ssl/css.key; ssl_prefer_server_ciphers on; ssl_dhparam /etc/ssl/certs/dhparam.pem; ssl_protocols TLSv1 TLSv1.1 TLSv1.2; ssl_ciphers &quot;EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4&quot;; keepalive_timeout 70; ssl_session_cache shared:SSL:10m; ssl_session_timeout 10m; server_name ajax.css.network; resolver 8.8.8.8; location / &#123; proxy_pass_header Server; proxy_set_header Host ajax.googleapis.com; proxy_set_header Accept-Encoding &apos;&apos;; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Scheme $scheme; proxy_pass https://googleajax; proxy_cache cache_one; proxy_cache_valid 200 304 365d; proxy_cache_key $host$uri$is_args$args; expires max; &#125;&#125; google-fonts.conf - 反向代理 Google FontGitlab：google-fonts.conf直接下载：google-fonts.conf修改替换其中的fonts.css.network为自己的域名即可。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129upstream google &#123; server fonts.googleapis.com:443;&#125;upstream gstatic &#123; server fonts.gstatic.com:443;&#125;server &#123; listen 80; server_name fonts.css.network; resolver 8.8.8.8; location /css &#123; sub_filter &apos;fonts.gstatic.com&apos; &apos;fonts.css.network&apos;; sub_filter_once off; sub_filter_types text/css; proxy_pass_header Server; proxy_set_header Host fonts.googleapis.com; proxy_set_header Accept-Encoding &apos;&apos;; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Scheme $scheme; proxy_pass https://google; proxy_cache cache_one; proxy_cache_valid 200 304 365d; proxy_cache_key $host$uri$is_args$args; expires max; &#125; location /icon &#123; sub_filter &apos;fonts.gstatic.com&apos; &apos;fonts.css.network&apos;; sub_filter_once off; sub_filter_types text/css; proxy_pass_header Server; proxy_set_header Host fonts.googleapis.com; proxy_set_header Accept-Encoding &apos;&apos;; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Scheme $scheme; proxy_pass https://google; proxy_cache cache_one; proxy_cache_valid 200 304 365d; proxy_cache_key $host$uri$is_args$args; expires max; &#125; location / &#123; proxy_pass_header Server; proxy_set_header Host fonts.gstatic.com; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Scheme $scheme; proxy_pass http://gstatic; proxy_cache cache_one; proxy_cache_valid 200 304 365d; proxy_cache_key $host$uri$is_args$args; expires max; &#125;&#125;server &#123; listen 443 ssl spdy; ssl on; ssl_certificate /root/ssl/css.crt; ssl_certificate_key /root/ssl/css.key; ssl_prefer_server_ciphers on; ssl_dhparam /etc/ssl/certs/dhparam.pem; ssl_protocols TLSv1 TLSv1.1 TLSv1.2; ssl_ciphers &quot;EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4&quot;; keepalive_timeout 70; ssl_session_cache shared:SSL:10m; ssl_session_timeout 10m; server_name fonts.css.network; resolver 8.8.8.8; location /css &#123; sub_filter &apos;fonts.gstatic.com&apos; &apos;fonts.css.network&apos;; sub_filter_once off; sub_filter_types text/css; proxy_pass_header Server; proxy_set_header Host fonts.googleapis.com; proxy_set_header Accept-Encoding &apos;&apos;; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Scheme $scheme; proxy_pass https://google; proxy_cache cache_one; proxy_cache_valid 200 304 365d; proxy_cache_key $host$uri$is_args$args; expires max; &#125; location /icon &#123; sub_filter &apos;fonts.gstatic.com&apos; &apos;fonts.css.network&apos;; sub_filter_once off; sub_filter_types text/css; proxy_pass_header Server; proxy_set_header Host fonts.googleapis.com; proxy_set_header Accept-Encoding &apos;&apos;; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Scheme $scheme; proxy_pass https://google; proxy_cache cache_one; proxy_cache_valid 200 304 365d; proxy_cache_key $host$uri$is_args$args; expires max; &#125; location / &#123; proxy_pass_header Server; proxy_set_header Host fonts.gstatic.com; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Scheme $scheme; proxy_pass https://gstatic; proxy_cache cache_one; proxy_cache_valid 200 304 365d; proxy_cache_key $host$uri$is_args$args; expires max; &#125;&#125; gravatar.conf - 反向代理 GravatarGitlab：gravatar.conf直接下载：gravatar.conf修改替换其中的gravatar.css.network为自己的域名即可。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859upstream gravatar &#123; server secure.gravatar.com:443;&#125;server &#123; listen 80; server_name gravatar.css.network; resolver 8.8.8.8; location / &#123; proxy_pass_header Server; proxy_set_header Host secure.gravatar.com; proxy_set_header Accept-Encoding &apos;&apos;; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Scheme $scheme; proxy_pass https://gravatar; proxy_cache cache_one; proxy_cache_valid 200 304 365d; proxy_cache_key $host$uri$is_args$args; expires max; &#125;&#125;server &#123; listen 443 ssl spdy; ssl on; ssl_certificate /root/ssl/css.crt; #改为自己的SSL证书位置 ssl_certificate_key /root/ssl/css.key; #改为自己的SSL私钥位置 ssl_prefer_server_ciphers on; ssl_dhparam /etc/ssl/certs/dhparam.pem; ssl_protocols TLSv1 TLSv1.1 TLSv1.2; ssl_ciphers &quot;EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4&quot;; keepalive_timeout 70; ssl_session_cache shared:SSL:10m; ssl_session_timeout 10m; server_name gravatar.css.network; resolver 8.8.8.8; location / &#123; proxy_pass_header Server; proxy_set_header Host secure.gravatar.com; proxy_set_header Accept-Encoding &apos;&apos;; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Scheme $scheme; proxy_pass https://gravatar; proxy_cache cache_one; proxy_cache_valid 200 304 365d; proxy_cache_key $host$uri$is_args$args; expires max; &#125;&#125; 重启 Nginx添加了配置文件后，需要执行下面的命令重启Nginx，使conf文件生效。 1sudo systemctl restart nginx.service 转载来源上面的conf文件我也是转载别人的，但是我并没有找到原作者所以无法写出来源。在这里向作者说一声抱歉。]]></content>
+      <categories>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>反向代理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Centos 安装 Aria2]]></title>
+    <url>%2FCentos%2Fcentos-install-aria2%2F</url>
+    <content type="text"><![CDATA[这几天没事干，弄了个Aria2用于离线下载文件。 Aria2 介绍aria2 is a lightweight multi-protocol &amp; multi-source command-line download utility. It supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink. aria2 can be manipulated via built-in JSON-RPC and XML-RPC interfaces.译文：aria2是一个轻量级的多协议和多源命令行下载工具。它支持HTTP / HTTPS，FTP，SFTP，BitTorrent和Metalink。aria2可以通过内置的JSON-RPC和XML-RPC接口进行操作。 安装方式1234yum install epel-release -y #安装epelyum install aria2 -y #安装aria2mkdir /etc/aria2/ #新建配置文件夹nano /etc/aria2/aria2.conf #新建配置文件，见下方配置文件内容 配置文件123456789101112131415161718192021222324252627282930313233343536373839404142434445#用户名#rpc-user=user#密码#rpc-passwd=passwd#上面的认证方式不建议使用,建议使用下面的token方式#设置加密的密钥#rpc-secret=token#允许rpcenable-rpc=true#允许所有来源, web界面跨域权限需要rpc-allow-origin-all=true#允许外部访问，false的话只监听本地端口rpc-listen-all=true#RPC端口, 仅当默认端口被占用时修改rpc-listen-port=6800#最大同时下载数(任务数), 路由建议值: 3max-concurrent-downloads=5#断点续传continue=true#同服务器连接数max-connection-per-server=5#最小文件分片大小, 下载线程数上限取决于能分出多少片, 对于小文件重要min-split-size=10M#单文件最大线程数, 路由建议值: 5split=10#下载速度限制max-overall-download-limit=0#单文件速度限制max-download-limit=0#上传速度限制max-overall-upload-limit=0#单文件速度限制max-upload-limit=0#断开速度过慢的连接#lowest-speed-limit=0#验证用，需要1.16.1之后的release版本#referer=*#文件保存路径, 默认为当前启动位置dir=/root/downloads#文件缓存, 使用内置的文件缓存, 如果你不相信Linux内核文件缓存和磁盘内置缓存时使用#disk-cache=0#另一种Linux文件缓存方式#enable-mmap=true#文件预分配, 能有效降低文件碎片, 提高磁盘性能. 缺点是预分配时间较长file-allocation=prealloc&lt;span data-mce-type=&quot;bookmark&quot; style=&quot;display: inline-block; width: 0px; overflow: hidden; line-height: 0;&quot; class=&quot;mce_SELRES_start&quot;&gt;&lt;/span&gt; 启动1234启动测试：aria2c --conf-path=/etc/aria2/aria2.conf无错误后台启动：aria2c --conf-path=/etc/aria2/aria2.conf -D]]></content>
+      <categories>
+        <category>Centos</category>
+      </categories>
+      <tags>
+        <tag>Centos</tag>
+        <tag>Aria2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[中国移动物联网麒麟版-mini远程点亮LED小灯]]></title>
+    <url>%2FIot%2Fchina-mobile-internet-of-things-unicorn-mini-lit-led%2F</url>
+    <content type="text"><![CDATA[我在中国移动物联网开发平台申请了一个麒麟板-mini，这是我用开发板实现用电脑远程电流LED小灯的笔记。开发板申请地址：中国移动Iot开发板申请 开发板拆箱 开发板简介 这个是mini版本的，不过有一个全功能的。 随板还有一个ST-Link V2 开发板的WIFI使用了ESP8266，引出了串口与复位引脚。 板子上带有一个USB转串口，使用了CH340的方案，并使用两个LED灯指示数据传输。 主控芯片选用的是 STM32F103RCT6，这是使用很多的一个MCU芯片，有大量的资料与学习教程，入门也是很容易的。 板子有四个LED灯，可以用来云端控制与上传LED灯状态。 为了节约PCB面积，调试口选用的是SWD口，只要4条线，比JTAG要少很多引脚。 板载一个温湿度传感器SHT20，使用的是I2C接口。 板载一片EEPROM，也是使用的I2C接口。 开发板的主要功能与主要元件就有这些了，还有就是电源与一些电阻电容了。 总体来看，开发板的资源的确是mini的。其他另一块非mini的麒麟座开发板。 开发板上手使用有一些细节方面笔者没在这里写出，如果有疑问请多多查资料或者联系笔者。 下载ST-LINK V2的软件和驱动首先你需要下载ST-LINK V2的软件和驱动。用来烧录程序到开发板中。驱动和程序的下载地址：下载驱动进去直接下载程序 STM32 ST-LINK utility 它会自动安装驱动。将麒麟版MINI送的 ST-LINK V2 的 3.3V GND SWDIO SWCLK 连接到开发板上，一一对应起来就可以了，再把USB插到电脑上，这时候开发板的LED灯就亮起来了（因为出厂前中移好像预先把程序烧录进去测试过）。 使用Keil uVision5进行编译你需要一个编译软件 Keil uVision5 用来编译程序。Keil uVision5下载地址：下载Keil uVision5下载其中的 MDK-Arm 。程序自行破解或者购买。 下载例程并使用安装完成后去中移物联网论坛或其他地方下载例程。我用的是现成的改好的。点亮LED例程（本文使用）：下载例程下载不了的，可以给我留言。中移物联网论坛例程资料：进入论坛下载例程后解压。打开 Project 文件夹内的 onenetdemo.uvproj出来了个对话框，点 Migrate to Device Pack 更新一下（原作者用的V4版本我用的是V5版本）更新好后，弹出几个提示，一路确定下去。在编译器中，点菜单中的 Project – Options for Target”….”然后如图那样设置然后开始修改文件。在开发者中心创建一个设备获取ID和API。还有修改WIFI连接信息。修改好后，直接创建应用拖四个按钮设置按钮属性，单击按钮，设置右边的属性和下面图片的值一一对应，然后保存。上面的步骤完成后，点菜单中的 Project – Build Target 进行编译。下方编译输出窗口中如果没有编译错误（0 Errror 0 Warning），那就离成功不远了。 进行烧录点 Flash – Download 进行烧录，这时候就应该成功了。然后进应用管理，打开你的应用。点开关进行LED小灯控制。 最后的测试嘿嘿，这就成功了。 ##后记感谢这几位大佬的教程。本文部分文字图片也引用了他们的，网址：https://open.iot.10086.cn/bbs/thread-1262-1-1.htmlhttps://open.iot.10086.cn/bbs/thread-1396-1-1.html我的这篇文章只是个人的笔记和总结，如果有不足之处，还望指出~谢谢！转载本文记得标明出处，再次谢谢！]]></content>
+      <categories>
+        <category>Iot</category>
+      </categories>
+      <tags>
+        <tag>中国移动</tag>
+        <tag>物联网</tag>
+        <tag>麒麟版</tag>
+        <tag>Iot</tag>
+      </tags>
+  </entry>
+</search>
