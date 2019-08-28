@@ -489,16 +489,12 @@
       <div class="tabs tabs-comment">
         <ul class="nav-tabs">
           
-            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
-          
             <li class="tab"><a href="#comment-disqusjs">disqusjs</a></li>
+          
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
           
         </ul>
         <div class="tab-content">
-          
-            <div class="tab-pane gitalk" id="comment-gitalk">
-              <div class="comments" id="gitalk-container"></div>
-            </div>
           
             <div class="tab-pane disqusjs" id="comment-disqusjs">
               
@@ -508,6 +504,10 @@
     </div>
   </div>
   
+            </div>
+          
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
             </div>
           
         </div>
@@ -907,6 +907,21 @@
   <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
 
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api: 'https://disqus.trycoding.fun/api/' || 'https://disqus.com/api/',
+      apikey: 'OPCq0F7pZvvXNCnSiJbLoybZ1cNqIrpEBnzF5DWvPilgpWW3nwiarwsWSXvUDOE3',
+      shortname: 'trycodingfun',
+      url: "https://trycoding.fun/Nginx/nginx-auth-basic/",
+      identifier: "Nginx/nginx-auth-basic/",
+      title: 'nginx下为访问页面增加身份认证',
+    });
+  }, window.DisqusJS);
+</script>
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
 
 <script>
@@ -924,21 +939,6 @@
     });
     gitalk.render('gitalk-container');
   }, window.Gitalk);
-</script>
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
-
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
-    window.dsqjs = new DisqusJS({
-      api: 'https://disqus.trycoding.fun/api/' || 'https://disqus.com/api/',
-      apikey: 'OPCq0F7pZvvXNCnSiJbLoybZ1cNqIrpEBnzF5DWvPilgpWW3nwiarwsWSXvUDOE3',
-      shortname: 'trycodingfun',
-      url: "https://trycoding.fun/Nginx/nginx-auth-basic/",
-      identifier: "Nginx/nginx-auth-basic/",
-      title: 'nginx下为访问页面增加身份认证',
-    });
-  }, window.DisqusJS);
 </script>
 
 </body>
