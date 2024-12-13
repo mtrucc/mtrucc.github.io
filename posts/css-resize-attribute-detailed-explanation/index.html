@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://trycoding.fun/posts/css-resize-attribute-detailed-explanation/"><meta name="generator" content="Astro v4.16.3"><!-- General Meta Tags --><title>CSS resize 属性详解 | TryCoding.Fun</title><meta name="title" content="CSS resize 属性详解 | TryCoding.Fun"><meta name="description" content="CSS `resize` 属性允许调整元素大小。本文详细介绍了 `resize` 属性的使用方法，并提供了一个自定义可调整大小侧边栏的代码示例，讲解如何通过修改滚动条样式来间接控制拖动按钮样式。"><meta name="author" content="Mt.r"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Facebook --><meta property="og:title" content="CSS resize 属性详解 | TryCoding.Fun"><meta property="og:description" content="CSS `resize` 属性允许调整元素大小。本文详细介绍了 `resize` 属性的使用方法，并提供了一个自定义可调整大小侧边栏的代码示例，讲解如何通过修改滚动条样式来间接控制拖动按钮样式。"><meta property="og:url" content="https://trycoding.fun/posts/css-resize-attribute-detailed-explanation/"><meta property="og:image" content="https://trycoding.fun/posts/css-resize-%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3.png"><!-- Article Published/Modified time --><meta property="article:published_time" content="2022-02-24T09:53:11.000Z"><meta property="article:modified_time" content="2022-02-24T09:53:11.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://trycoding.fun/posts/css-resize-attribute-detailed-explanation/"><meta property="twitter:title" content="CSS resize 属性详解 | TryCoding.Fun"><meta property="twitter:description" content="CSS `resize` 属性允许调整元素大小。本文详细介绍了 `resize` 属性的使用方法，并提供了一个自定义可调整大小侧边栏的代码示例，讲解如何通过修改滚动条样式来间接控制拖动按钮样式。"><meta property="twitter:image" content="https://trycoding.fun/posts/css-resize-%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3.png"><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"CSS resize 属性详解 | TryCoding.Fun","image":"https://trycoding.fun/posts/css-resize-%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3.png","datePublished":"2022-02-24T09:53:11.000Z","dateModified":"2022-02-24T09:53:11.000Z","author":[{"@type":"Person","name":"Mt.r","url":"https://trycoding.fun/"}]}</script><meta name="theme-color" content=""><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script src="/toggle-theme.js" async></script><link rel="stylesheet" href="/_astro/about.Di_eHWgM.css">
+<style>a:where(.astro-blwjyjpt){position:relative;text-decoration-line:underline;text-decoration-style:dashed}a:where(.astro-blwjyjpt):hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a:where(.astro-blwjyjpt):focus-visible{padding:.25rem}a:where(.astro-blwjyjpt) svg:where(.astro-blwjyjpt){margin-right:-1.25rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group:where(.astro-blwjyjpt):hover a:where(.astro-blwjyjpt) svg:where(.astro-blwjyjpt){fill:rgb(var(--color-accent))}
+@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+main:where(.astro-vj4tpspi){margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title:where(.astro-vj4tpspi){font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}
+</style><script type="module" src="/_astro/hoisted.BYHvv9Tn.js"></script><style>[data-astro-transition-scope="astro-plk3gbjq-1"] { view-transition-name: css-resize-\5C5E\6027\8BE6\89E3; }@layer astro { ::view-transition-old(css-resize-\5C5E\6027\8BE6\89E3) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(css-resize-\5C5E\6027\8BE6\89E3) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(css-resize-\5C5E\6027\8BE6\89E3) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(css-resize-\5C5E\6027\8BE6\89E3) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-plk3gbjq-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-plk3gbjq-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-plk3gbjq-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-plk3gbjq-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-plk3gbjq-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-plk3gbjq-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-plk3gbjq-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-plk3gbjq-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-2"] { view-transition-name: css; }@layer astro { ::view-transition-old(css) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(css) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(css) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(css) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body>  <header class="astro-3ef6ksr2"> <a id="skip-to-content" href="#main-content" class="astro-3ef6ksr2">Skip to content</a> <div class="nav-container astro-3ef6ksr2"> <div class="top-nav-wrap astro-3ef6ksr2"> <a href="/" class="logo whitespace-nowrap astro-3ef6ksr2"> TryCoding.Fun </a> <nav id="nav-menu" class="astro-3ef6ksr2"> <button class="hamburger-menu focus-outline astro-3ef6ksr2" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="menu-icon astro-3ef6ksr2"> <line x1="7" y1="12" x2="21" y2="12" class="line astro-3ef6ksr2"></line> <line x1="3" y1="6" x2="21" y2="6" class="line astro-3ef6ksr2"></line> <line x1="12" y1="18" x2="21" y2="18" class="line astro-3ef6ksr2"></line> <line x1="18" y1="6" x2="6" y2="18" class="close astro-3ef6ksr2"></line> <line x1="6" y1="6" x2="18" y2="18" class="close astro-3ef6ksr2"></line> </svg> </button> <ul id="menu-items" class="display-none sm:flex astro-3ef6ksr2"> <li class="astro-3ef6ksr2"> <a href="/posts/" class=" astro-3ef6ksr2">
+Posts
+</a> </li> <li class="astro-3ef6ksr2"> <a href="/tags/" class=" astro-3ef6ksr2">
+Tags
+</a> </li> <li class="astro-3ef6ksr2"> <a href="/about/" class=" astro-3ef6ksr2">
+About
+</a> </li> <li class="astro-3ef6ksr2"> <a href="/archives/" class="group inline-block hover:text-skin-accent focus-outline flex justify-center p-3 sm:p-1 astro-3ef6ksr2" aria-label="archives" title="Archives"><span class="astro-3ef6ksr2">
+Archives
+</span> </a> </li> <li class="astro-3ef6ksr2"> <a href="/search/" class="group inline-block hover:text-skin-accent focus-outline p-3 sm:p-1  flex astro-3ef6ksr2" aria-label="search" title="Search"> <svg xmlns="http://www.w3.org/2000/svg" class="scale-125 sm:scale-100 astro-3ef6ksr2"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-3ef6ksr2"></path> </svg> <span class="sr-only astro-3ef6ksr2">Search</span> </a> </li> <li class="astro-3ef6ksr2"> <button id="theme-btn" class="focus-outline astro-3ef6ksr2" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-3ef6ksr2"> <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-3ef6ksr2"></path> </svg> <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-3ef6ksr2"> <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-3ef6ksr2"></path> </svg> </button> </li> </ul> </nav> </div> </div> <div class="max-w-3xl mx-auto px-4"> <hr class="border-skin-line" aria-hidden="true"> </div> </header>   <div class="mx-auto flex w-full max-w-3xl justify-start px-2 astro-vj4tpspi"> <button class="focus-outline mb-2 mt-8 flex hover:opacity-75 items-center astro-vj4tpspi" onclick="(() => (history.length === 1) ? window.location = '/' : history.back())()"> <svg xmlns="http://www.w3.org/2000/svg" class="astro-vj4tpspi"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-vj4tpspi"></path> </svg><span class="astro-vj4tpspi">Go back</span> </button> </div> <main id="main-content" class="astro-vj4tpspi"> <h1 class="post-title astro-vj4tpspi" data-astro-transition-scope="astro-plk3gbjq-1">CSS resize 属性详解</h1> <div class="flex items-center space-x-2 opacity-80 my-2 astro-vj4tpspi"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 inline-block h-6 w-6 min-w-[1.375rem] fill-skin-base" aria-hidden="true"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="sr-only">Published:</span><span class="italic text-base"><time dateTime="2022-02-24T09:53:11.000Z">Feb 24, 2022</time><span aria-hidden="true"> | </span><span class="sr-only"> at </span><span class="text-nowrap">09:53 AM</span><span aria-hidden="true"> | </span><a class="space-x-1.5 hover:opacity-75" href="https://github.com/mtrucc/blog-new-2/tree/main/src/content/blog/css-resize.md" rel="noopener noreferrer" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icons-tabler-outline icon-tabler-edit inline-block !scale-90 fill-skin-base" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg><span class="text-base italic">Suggest Changes</span></a></span></div> <article id="article" class="prose mx-auto mt-8 max-w-3xl astro-vj4tpspi"> <p>resize 这个属性可以调整窗口大小，特别棒，但也有一些局限性</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/resize">https://developer.mozilla.org/en-US/docs/Web/CSS/resize</a></p>
+<p>然后附上一个特别厉害的代码，只可意会不可言传。</p>
+<!-- more -->
+<p>Html</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="background-color:#ffffff;--shiki-dark-bg:#011627;color:#24292eff;--shiki-dark:#d6deeb; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;!</span><span style="color:#22863A;--shiki-dark:#CAECE6">DOCTYPE</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> html</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-dark:#637777">&#x3C;!--</span><span style="color:#C2C3C5;font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic"> saved from url=(0030)http://43.154.27.149/test.html </span><span style="color:#C2C3C5;--shiki-dark:#637777">--></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">html</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> lang</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">en</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">  &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">head</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">meta</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> http-equiv</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">Content-Type</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> content</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">text/html; charset=UTF-8</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">meta</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> name</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">viewport</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> content</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">width=device-width, initial-scale=1.0</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA"> /></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">title</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">Document</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">title</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">style</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> type</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">text/css</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#7FDBCA">      *</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        margin</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        padding</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      html</span><span style="color:#212121;--shiki-dark:#C792EA">,</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      body</span><span style="color:#212121;--shiki-dark:#C792EA">,</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      div</span><span style="color:#6F42C1;--shiki-dark:#C5E478">.</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">box</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        height</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 100</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">%</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        width</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 100</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">%</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      div</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        box-sizing</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#FF6363"> border-box</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      div</span><span style="color:#6F42C1;--shiki-dark:#C5E478">.</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">box</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        display</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#FF6363"> flex</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      div</span><span style="color:#6F42C1;--shiki-dark:#C5E478">.</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">side</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        position</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#FF6363"> relative</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        height</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 100</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">%</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        outline</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 1</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">px</span><span style="color:#1976D2;--shiki-dark:#FF6363"> solid</span><span style="color:#1976D2;--shiki-dark:#7FDBCA"> greenyellow</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      div</span><span style="color:#6F42C1;--shiki-dark:#C5E478">.</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">content</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        flex</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 1</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        height</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 100</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">%</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        padding</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 10</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">px</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-dark:#637777">      /*</span><span style="color:#C2C3C5;font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic"> 侧边栏文本样式 </span><span style="color:#C2C3C5;--shiki-dark:#637777">*/</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      div</span><span style="color:#6F42C1;--shiki-dark:#C5E478">.</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">text</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        width</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 100</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">%</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        height</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 100</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">%</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        position</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#FF6363"> absolute</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        left</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        top</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        overflow</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#FF6363"> hidden</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        padding</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 5</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">px</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        background</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> #</span><span style="color:#1976D2;--shiki-dark:#FFEB95">ffffff</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-dark:#637777">      /*</span><span style="color:#C2C3C5;font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">拖动按钮样式</span><span style="color:#C2C3C5;--shiki-dark:#637777">*/</span></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-dark:#637777">      /*</span><span style="color:#C2C3C5;font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">拖动 bar 盒时，父级盒 side 会被 bar 盒撑开，又因为 text 盒的宽高都设为 100%，所以改变 bar 盒就是在改变 text 盒</span><span style="color:#C2C3C5;--shiki-dark:#637777">*/</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      div</span><span style="color:#6F42C1;--shiki-dark:#C5E478">.</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">bar</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        width</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 300</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">px</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        height</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 100</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">%</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        margin-right</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> -2</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">px</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-dark:#637777">        /*</span><span style="color:#C2C3C5;font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic"> 因为 bar 盒子和 text 盒子是重合的所以必须设置一个负值才能看到我们的拖动按钮</span><span style="color:#C2C3C5;--shiki-dark:#637777">*/</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        overflow</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#FF6363"> scroll</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-dark:#637777">        /*</span><span style="color:#C2C3C5;font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic"> 可设置其他值来进行对别，只可意会，不可言传</span><span style="color:#C2C3C5;--shiki-dark:#637777">*/</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        resize</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#FF6363"> horizontal</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-dark:#637777">        /*</span><span style="color:#C2C3C5;font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">水平拖放</span><span style="color:#C2C3C5;--shiki-dark:#637777">*/</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-dark:#637777">      /*</span><span style="color:#C2C3C5;font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">因为拖动按钮属于滚动条系列，所以可通过改变滚动来间接改变拖动按钮的样式</span><span style="color:#C2C3C5;--shiki-dark:#637777">*/</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      div</span><span style="color:#6F42C1;--shiki-dark:#C5E478">.</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">bar</span><span style="color:#6F42C1;--shiki-dark:#C5E478">::</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">-webkit-scrollbar</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        width</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 10</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">px</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        height</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#F78C6C"> 9999</span><span style="color:#D32F2F;--shiki-dark:#FFEB95">px</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-dark:#637777">        /*</span><span style="color:#C2C3C5;font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">可设为 100% 或者其他数值来查看展示效果，只可意会，不可言传</span><span style="color:#C2C3C5;--shiki-dark:#637777">*/</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#FF6363">      div</span><span style="color:#6F42C1;--shiki-dark:#C5E478">.</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">bar</span><span style="color:#6F42C1;--shiki-dark:#C5E478">::</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">-webkit-resizer</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-dark:#637777">        /*</span><span style="color:#C2C3C5;font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic"> 设置拖放按钮的背景颜色 </span><span style="color:#C2C3C5;--shiki-dark:#637777">*/</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-dark:#80CBC4">        background</span><span style="color:#D32F2F;--shiki-dark:#D6DEEB">:</span><span style="color:#1976D2;--shiki-dark:#7FDBCA"> skyblue</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">      }</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">style</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">  &#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">head</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">  &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">body</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">div</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> class</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">box</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">      &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">div</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> class</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">side</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">        &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">div</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> class</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">bar</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> style</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">width: 257px</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">>&#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">div</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">        &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">div</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> class</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">text</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">          对酒当歌 1，人生几何 2！譬如朝露，去日苦多 3。慨当以慷 4，忧思难忘。</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">          何以解忧？唯有杜康 5。青青子衿，悠悠我心 6。但为君故，沉吟至今 7。</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">          呦呦鹿鸣，食野之苹。我有嘉宾，鼓瑟吹笙 8。明明如月，何时可掇 9？</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">          忧从中来，不可断绝。越陌度阡 10，枉用相存 11。契阔谈宴 12，心念旧恩。</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">          月明星稀，乌鹊南飞。绕树三匝 13，何枝可依？山不厌高，海不厌深 14。</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">          周公吐哺，天下归心 15。 [1]</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">        &#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">div</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">      &#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">div</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">      &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">div</span><span style="color:#6F42C1;font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> class</span><span style="color:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#22863A;--shiki-dark:#ECC48D">content</span><span style="color:#22863A;--shiki-dark:#D9F5DD">"</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">        滕王阁序 1</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">        豫章故郡，洪都新府 2。星分翼轸，地接衡庐 3。襟三江而带五湖 4，控蛮荆而引瓯越 5。物华天宝，龙光射牛斗之墟 6；人杰地灵，徐孺下陈蕃之榻 7。雄州雾列 8，俊采星驰 9。台隍枕夷夏之交 10，宾主尽东南之美 11。都督阎公之雅望，棨戟遥临；宇文新州之懿范，襜帷暂驻 12。十旬休假 13，胜友如云；千里逢迎 14，高朋满座。腾蛟起凤，孟学士之词宗 15；紫电清霜，王将军之武库 16。家君作宰，路出名区；童子何知，躬逢胜饯 17。</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">        时维九月，序属三秋 18。潦水尽而寒潭清，烟光凝而暮山紫。俨骖騑于上路 19，访风景于崇阿。临帝子之长洲，得天人之旧馆 20。层峦耸翠，上出重霄；飞阁流丹，下临无地 21。鹤汀凫渚，穷岛屿之萦回；桂殿兰宫，即冈峦之体势 22。</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">        披绣闼，俯雕甍 23，山原旷其盈视，川泽纡其骇瞩 24。闾阎扑地，钟鸣鼎食之家；舸舰弥津，青雀黄龙之舳 25。云销雨霁，彩彻区明 26。落霞与孤鹜齐飞，秋水共长天一色。渔舟唱晚，响穷彭蠡之滨 27，雁阵惊寒，声断衡阳之浦 28。</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">        遥襟甫畅，逸兴遄飞 29。爽籁发而清风生，纤歌凝而白云遏 30。睢园绿竹，气凌彭泽之樽 31；邺水朱华，光照临川之笔 32。四美具 33，二难并。穷睇眄于中天 34，极娱游于暇日。天高地迥，觉宇宙之无穷；兴尽悲来，识盈虚之有数 35。望长安于日下，目吴会于云间 36。地势极而南溟深，天柱高而北辰远 37。关山难越，谁悲失路之人；萍水相逢，尽是他乡之客。怀帝阍而不见，奉宣室以何年 38？</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">        嗟乎！时运不齐 39，命途多舛 40。冯唐易老，李广难封 41。屈贾谊于长沙，非无圣主 42；窜梁鸿于海曲，岂乏明时 43？所赖君子见机，达人知命 44。老当益壮，宁移白首之心 45？穷且益坚，不坠青云之志 46。酌贪泉而觉爽，处涸辙以犹欢 47。北海虽赊，扶摇可接 48；东隅已逝，桑榆非晚 49。孟尝高洁，空余报国之情 50；阮籍猖狂，岂效穷途之哭 51！</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">        勃，三尺微命 52，一介书生。无路请缨，等终军之弱冠 53；有怀投笔，慕宗悫之长风 54。舍簪笏于百龄，奉晨昏于万里 55。非谢家之宝树，接孟氏之芳邻 56。他日趋庭，叨陪鲤对 57；今兹捧袂，喜托龙门 58。杨意不逢，抚凌云而自惜 59；钟期既遇，奏流水以何惭 60？</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">        呜乎！胜地不常，盛筵难再 61；兰亭已矣 62，梓泽丘墟 63。临别赠言，幸承恩于伟饯；登高作赋，是所望于群公 64。敢竭鄙怀，恭疏短引 65；一言均赋，四韵俱成 66。请洒潘江，各倾陆海云尔 67。</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">        滕王高阁临江渚，佩玉鸣鸾罢歌舞。画栋朝飞南浦云，珠帘暮卷西山雨。</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">        闲云潭影日悠悠，物换星移几度秋。阁中帝子今何在？槛外长江空自流。 [2]</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">      &#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">div</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">    &#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">div</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">    &#x3C;</span><span style="color:#22863A;--shiki-dark:#CAECE6">script</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">>&#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">script</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">  &#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">body</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;/</span><span style="color:#22863A;--shiki-dark:#CAECE6">html</span><span style="color:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre> </article> <ul class="my-8 astro-vj4tpspi"> <li class="inline-block my-1 underline-offset-4 astro-blwjyjpt"> <a href="/tags/css/" class="text-sm pr-2 group astro-blwjyjpt" data-astro-transition-scope="astro-36ssibgs-2"> <!-- <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class={`${size === "sm" ? " scale-75" : "scale-110"}`}
+      ><path
+        d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z"
+      ></path>
+    </svg> --> <span class=" astro-blwjyjpt">#CSS</span> </a> </li>  </ul> <div class="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row-reverse sm:items-end sm:gap-4 astro-vj4tpspi"> <button id="back-to-top" class="focus-outline whitespace-nowrap py-1 hover:opacity-75 astro-vj4tpspi"> <svg xmlns="http://www.w3.org/2000/svg" class="rotate-90 astro-vj4tpspi"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-vj4tpspi"></path> </svg> <span class="astro-vj4tpspi">Back to Top</span> </button> <!-- <ShareLinks /> --> </div> <hr class="my-6 border-dashed astro-vj4tpspi"> <!-- Previous/Next Post Buttons --> <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 astro-vj4tpspi"> <a href="/posts/get-all-script-tags-in-javascript" class="flex w-full gap-1 hover:opacity-75 astro-vj4tpspi"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left flex-none astro-vj4tpspi">  <path stroke="none" d="M0 0h24v24H0z" fill="none" class="astro-vj4tpspi"></path> <path d="M15 6l-6 6l6 6" class="astro-vj4tpspi"></path>  </svg> <div class="astro-vj4tpspi"> <span class="astro-vj4tpspi">Previous Post</span> <div class="text-sm text-skin-accent/85 astro-vj4tpspi">JavaScript 获取页面所有 Script 标签</div> </div> </a> <a href="/posts/element-el-tree-search-highlight" class="flex w-full justify-end gap-1 text-right hover:opacity-75 sm:col-start-2 astro-vj4tpspi"> <div class="astro-vj4tpspi"> <span class="astro-vj4tpspi">Next Post</span> <div class="text-sm text-skin-accent/85 astro-vj4tpspi">Element el-tree 组件搜索高亮</div> </div> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right flex-none astro-vj4tpspi">  <path stroke="none" d="M0 0h24v24H0z" fill="none" class="astro-vj4tpspi"></path> <path d="M9 6l6 6l-6 6" class="astro-vj4tpspi"></path>  </svg> </a> </div> </main> <footer class="mt-auto astro-sz7xmlte"> <div class="max-w-3xl mx-auto px-0"> <hr class="border-skin-line" aria-hidden="true"> </div> <div class="footer-wrapper astro-sz7xmlte"> <div class="social-icons flex astro-upu6fzxr"> <a href="https://github.com/satnaing/astro-paper" class="group inline-block hover:text-skin-accent link-button astro-upu6fzxr" title=" TryCoding.Fun on Github"> <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg> <span class="sr-only astro-upu6fzxr"> TryCoding.Fun on Github</span> </a><a href="mailto:mtrucc@gmail.com" class="group inline-block hover:text-skin-accent link-button astro-upu6fzxr" title="Send an email to TryCoding.Fun"> <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3 7 12 13 21 7"></polyline>
+    </svg> <span class="sr-only astro-upu6fzxr">Send an email to TryCoding.Fun</span> </a> </div>  <div class="copyright-wrapper astro-sz7xmlte"> <span class="astro-sz7xmlte">Copyright &#169; 2024</span> <span class="separator astro-sz7xmlte">&nbsp;|&nbsp;</span> <span class="astro-sz7xmlte">All rights reserved.</span> </div> </div> </footer>   </body></html>  <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-skin-fill";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-skin-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ml-2 opacity-0 group-hover:opacity-100 focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      const copyButton = document.createElement("button");
+      copyButton.className =
+        "copy-code absolute right-3 -top-3 rounded bg-skin-card px-2 py-1 text-xs leading-4 text-skin-base font-medium";
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    document.querySelector("#back-to-top")?.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+  }
+  backToTop();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>
